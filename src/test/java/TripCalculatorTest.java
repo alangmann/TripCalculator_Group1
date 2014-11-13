@@ -9,5 +9,5 @@ public class TripCalculatorTest {
     public void testDummy() {
         assertTrue(true);
     }
-    // Test commit
+    // test commit
 }
