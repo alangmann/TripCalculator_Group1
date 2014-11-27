@@ -18,4 +18,16 @@ public class Route {
     public int getKm() {
         return km;
     }
+
+    public int getFee() {
+        return fee;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getSlope() {
+        return slope;
+    }
 }
