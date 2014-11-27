@@ -14,4 +14,19 @@ public class RouteTest {
         assertTrue(testRoute.getKm()==10);
     }
 
+    @Test
+    public void routeReturns5Slope () {
+        assertTrue(testRoute.getSlope()==5);
+    }
+
+    @Test
+    public void routeReturnsHighway () {
+        assertTrue("Highway".equals(testRoute.getType()));
+    }
+
+    @Test
+    public void routeReturns5Fee () {
+        assertTrue(testRoute.getFee()==5);
+    }
+
 }
