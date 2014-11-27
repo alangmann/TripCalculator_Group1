@@ -10,5 +10,5 @@ public class TripCalculatorTest {
         assertTrue(true);
     }
 
-    //Test by Lukas
+
 }
