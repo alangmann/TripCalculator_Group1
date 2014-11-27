@@ -9,5 +9,6 @@ public class TripCalculatorTest {
     public void testDummy() {
         assertTrue(true);
     }
-    // test commit
+
+    //Test by Lukas
 }
