@@ -15,6 +15,11 @@ public class Route {
         this.fee = fee;
     }
 
+    public double getCO2Consumption()
+    {
+        return km *0.1325 * slope / (km * 1000);
+    }
+
     public double getKm() {
         return km;
     }

@@ -11,7 +11,7 @@ public class Sprit {
 
     private static Sprit instance;
     private HashMap<Day, double[]> spritMap = new HashMap<Day, double[]>();
-    private static final String PATH = System.getProperty("user.dir") + File.pathSeparator + "src" + File.pathSeparator + "main" + File.pathSeparator + "resources" + File.pathSeparator + "sprit_db.csv";
+    private static final String PATH = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "sprit_db.csv";
 
     public enum Day {
         SUNDAY, MONDAY, TUESDAY, WEDNESDAY,
