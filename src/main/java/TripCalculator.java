@@ -3,7 +3,13 @@
  */
 public class TripCalculator {
 
-    public TripCalculator() {
+    private static TripCalculator calculator = new TripCalculator();
 
+    private TripCalculator() {
+
+    }
+
+    public static TripCalculator getInstance() {
+        return calculator;
     }
 }
