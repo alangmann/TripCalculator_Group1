@@ -3,23 +3,23 @@
  */
 public class Route {
 
-    private int km;
-    private int slope;
+    private double km;
+    private double slope;
     private String type;
-    private int fee;
+    private double fee;
 
-    public Route(int km, int slope, String type, int fee) {
+    public Route(double km, double slope, String type, double fee) {
         this.km = km;
         this.slope = slope;
         this.type = type;
         this.fee = fee;
     }
 
-    public int getKm() {
+    public double getKm() {
         return km;
     }
 
-    public int getFee() {
+    public double getFee() {
         return fee;
     }
 
@@ -27,7 +27,17 @@ public class Route {
         return type;
     }
 
-    public int getSlope() {
+    public double getSlope() {
         return slope;
+    }
+
+    @Override
+    public String toString() {
+        return "Route{" +
+                "km=" + km +
+                ", slope=" + slope +
+                ", type='" + type + '\'' +
+                ", fee=" + fee +
+                '}';
     }
 }

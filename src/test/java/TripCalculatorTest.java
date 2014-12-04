@@ -10,5 +10,10 @@ public class TripCalculatorTest {
         assertTrue(true);
     }
 
+    @Test
+    public void loadRoutesWorks() {
+        assertTrue(TripCalculator.getInstance().getRoutes().size() > 0);
+    }
+
 
 }
