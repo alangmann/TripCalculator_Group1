@@ -28,11 +28,16 @@ public class RouteTest {
 
     @Test
     public void CO2ConsumptionFor10kmAnd5mSlopeReturns1comma325() {
-        assertTrue(String.format("%.3f", (new Route(10, 5, "baum", 1).getCO2Consumption())).equals("1.326"));
+        assertTrue(String.format("%.3f", (new Route(10, 5, "test", 1).getCO2Consumption())).equals("1.326"));
     }
 
     @Test
     public void CO2ConsumptionFor20kmAnd5mSlopeReturns2comma640() {
-        assertTrue(String.format("%.3f", (new Route(20, 5, "baum", 1).getCO2Consumption())).equals("2.651"));
+        assertTrue(String.format("%.3f", (new Route(20, 5, "test", 1).getCO2Consumption())).equals("2.651"));
+    }
+
+    @Test
+    public void CO2ConsumptionFor25kmAnd88mSlopeReturns3comma324() {
+        assertTrue(String.format("%.3f", (new Route(25, 88, "test", 1).getCO2Consumption())).equals("3.324"));
     }
 }
