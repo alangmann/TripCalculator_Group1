@@ -1,6 +1,3 @@
-/**
- * Created by christoph on 11/27/2014.
- */
 public class Route {
 
     private double km;
@@ -17,7 +14,7 @@ public class Route {
 
     public double getCO2Consumption()
     {
-        return km *0.1325 * slope / (km * 1000);
+        return km * 1000 *0.1325 * slope / (km * 1000) * 2;
     }
 
     public double getKm() {
