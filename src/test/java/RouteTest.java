@@ -45,6 +45,6 @@ public class RouteTest {
 
     @Test
     public void CO2ConsumptionFor1kmAnd50mSlopeReturns0() {
-        assertTrue(new Route(1, 50, "test", 1).getCO2Consumption()==0);
+        assertTrue(new Route(1, -50, "test", 1).getCO2Consumption()==0);
     }
 }
