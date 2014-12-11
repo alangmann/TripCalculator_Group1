@@ -3,6 +3,7 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+  <component name="IdProvider" IDEtalkID="A256758EB9B80017AA787F5E4161AFC3" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
@@ -25,6 +26,13 @@
                 </list>
               </option>
               <option name="trunkUrl" value="https://github.com/alangmann/TripCalculator_Group1/trunk" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/Trip_Calculator_G1">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="trunkUrl" value="" />
             </SvnBranchConfiguration>
           </value>
         </entry>
