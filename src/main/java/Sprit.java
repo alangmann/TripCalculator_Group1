@@ -1,12 +1,8 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashMap;
 
-/**
- * Created by Lukas on 27.11.2014.
- */
 public class Sprit {
 
     private static Sprit instance;

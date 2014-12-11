@@ -14,7 +14,7 @@ public class Route {
 
     public double getCO2Consumption()
     {
-        return km * 1000 *0.1325 * slope / (km * 1000) * 2;
+        return km * 0.1325 * (slope / (km * 1000) + 1);
     }
 
     public double getKm() {

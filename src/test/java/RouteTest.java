@@ -27,9 +27,14 @@ public class RouteTest {
     }
 
     @Test
-    public void CO2ConsumptionFor10kmAnd5mSlopeReturns1comma3256625() {
+    public void CO2ConsumptionFor10kmAnd5mSlopeReturns1comma325() {
         System.out.println(new Route(10, 5, "baum", 1).getCO2Consumption());
-        assertTrue(String.format("%2.3f", (new Route(10, 5, "baum", 1).getCO2Consumption())).equals("1.325"));
+        assertTrue(String.format("%.3f", (new Route(10, 5, "baum", 1).getCO2Consumption())).equals("1.325"));
     }
 
+    @Test
+    public void CO2ConsumptionFor20kmAnd5mSlopeReturns2comma640() {
+        System.out.println(new Route(20, 5, "baum", 1).getCO2Consumption());
+        assertTrue(String.format("%.3f", (new Route(20, 5, "baum", 1).getCO2Consumption())).equals("2.650"));
+    }
 }
