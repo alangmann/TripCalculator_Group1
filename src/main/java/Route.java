@@ -2,13 +2,17 @@ public class Route {
 
     private double km;
     private double slope;
-    private String type;
+    private RouteType type;
     private double fee;
+
+    public enum RouteType {
+        COUNTRYROAD, HIGHWAY, GRAVELROAD, UNDEFINED
+    }
 
     public Route(double km, double slope, String type, double fee) {
         this.km = km;
         this.slope = slope;
-        this.type = type;
+        this.type = getRouteTypeFormString(type);
         this.fee = fee;
     }
 
@@ -22,6 +26,23 @@ public class Route {
         return km * 0.1325 * (slope / (km * 1000) + 1);
     }
 
+    private RouteType getRouteTypeFormString(String type)
+    {
+        if(type.equalsIgnoreCase("countryroad"))
+        {
+            return RouteType.COUNTRYROAD;
+        }
+        if(type.equalsIgnoreCase("highway"))
+        {
+            return RouteType.HIGHWAY;
+        }
+        if(type.equalsIgnoreCase("gravelroad"))
+        {
+            return RouteType.GRAVELROAD;
+        }
+        return RouteType.UNDEFINED;
+    }
+
     public double getKm() {
         return km;
     }
@@ -30,7 +51,7 @@ public class Route {
         return fee;
     }
 
-    public String getType() {
+    public RouteType getType() {
         return type;
     }
 
