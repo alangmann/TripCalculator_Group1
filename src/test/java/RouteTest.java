@@ -40,4 +40,9 @@ public class RouteTest {
     public void CO2ConsumptionFor25kmAnd88mSlopeReturns3comma324() {
         assertTrue(String.format("%.3f", (new Route(25, 88, "test", 1).getCO2Consumption())).equals("3.324"));
     }
+
+    @Test
+    public void CO2ConsumptionFor1kmAnd50mSlopeReturns0() {
+        assertTrue(new Route(1, 50, "test", 1).getCO2Consumption()==0);
+    }
 }
