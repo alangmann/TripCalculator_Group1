@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import static org.junit.Assert.assertTrue;
 
-public class RouteTest {
+public class RouteTest extends RouteTypes{
 
     private Route testRoute = new Route(10, 5, "Highway", 5);
 
@@ -20,7 +20,7 @@ public class RouteTest {
 
     @Test
     public void routeReturnsHighway() {
-        assertTrue("Highway".equals(testRoute.getType()));
+        assertTrue(RouteType.HIGHWAY.equals(testRoute.getType()));
     }
 
     @Test
