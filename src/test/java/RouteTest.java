@@ -47,4 +47,9 @@ public class RouteTest extends RouteTypes{
     public void CO2ConsumptionFor1kmAnd50mSlopeReturns0() {
         assertTrue(new Route(1, -50, "test", 1).getCO2Consumption()==0);
     }
+
+    @Test
+    public void GravelroadIsDoubleHighway() {
+        assertTrue(new Route(1, -50, "Highway", 1).getCO2Consumption()*2==new Route(1, -50, "Gravelroad", 1).getCO2Consumption());
+    }
 }
