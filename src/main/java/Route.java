@@ -19,7 +19,7 @@ public class Route extends RouteTypes {
         {
             return 0;
         }
-        return km * 0.1325 * (slope / (km * 1000) + 1);
+        return km * 0.1325 * (slope / (km * 1000) + 1) * factorMap.get(type);
     }
 
     private RouteType getRouteTypeFormString(String type)

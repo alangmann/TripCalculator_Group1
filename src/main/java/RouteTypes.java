@@ -11,5 +11,6 @@ public class RouteTypes {
         factorMap.put(RouteType.COUNTRYROAD, 1.2);
         factorMap.put(RouteType.HIGHWAY, 1.);
         factorMap.put(RouteType.GRAVELROAD, 2.);
+        factorMap.put(RouteType.UNDEFINED, 1.);
     }
 }
