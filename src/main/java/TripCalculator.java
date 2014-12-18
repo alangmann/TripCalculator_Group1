@@ -3,6 +3,8 @@ import java.util.LinkedList;
 
 public class TripCalculator {
 
+    private static final String fileName = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "routes.csv";
+
     private static TripCalculator calculator = new TripCalculator();
     private Sprit sprit;
     private LinkedList<Route> routes = new LinkedList<>();
@@ -22,7 +24,7 @@ public class TripCalculator {
     private void loadData() throws IOException {
         sprit = Sprit.getInstace();
 
-        FileReader fr = new FileReader(System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "routes.csv");
+        FileReader fr = new FileReader(fileName);
         BufferedReader br = new BufferedReader(fr);
 
         String str;
