@@ -1,6 +1,5 @@
 import org.junit.Before;
 import org.junit.Test;
-
 import java.io.IOException;
 import java.util.Locale;
 
@@ -57,11 +56,6 @@ public class RouteTest extends RouteTypes{
 
     @Test
     public void GravelroadIsDoubleHighway() {
-        assertTrue(new Route(1, -50, "Highway", 1).getCO2Consumption()*2==new Route(1, -50, "Gravelroad", 1).getCO2Consumption());
-    }
-
-    @Test(expected = IOException.class)
-    public void () {
         assertTrue(new Route(1, -50, "Highway", 1).getCO2Consumption()*2==new Route(1, -50, "Gravelroad", 1).getCO2Consumption());
     }
 }
