@@ -54,14 +54,4 @@ public class Route extends RouteTypes {
     public double getSlope() {
         return slope;
     }
-
-    @Override
-    public String toString() {
-        return "Route{" +
-                "km=" + km +
-                ", slope=" + slope +
-                ", type='" + type + '\'' +
-                ", fee=" + fee +
-                '}';
-    }
 }

@@ -1,20 +1,15 @@
 import java.io.*;
 import java.util.LinkedList;
 
-/**
- * Created by andreas.langmann on 12.11.2014.
- */
 public class TripCalculator {
 
     private static TripCalculator calculator = new TripCalculator();
     private Sprit sprit;
-    private LinkedList<Route> routes = new LinkedList<Route>();
+    private LinkedList<Route> routes = new LinkedList<>();
 
     private TripCalculator() {
         try {
             loadData();
-        } catch (FileNotFoundException e) {
-            System.out.println("Failed in TripCalculator - " + e.getMessage());
         } catch (IOException e) {
             System.out.println("Failed in TripCalculator - " + e.getMessage());
         }
@@ -30,7 +25,7 @@ public class TripCalculator {
         FileReader fr = new FileReader(System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "routes.csv");
         BufferedReader br = new BufferedReader(fr);
 
-        String str = "";
+        String str;
         while((str = br.readLine()) != null)
         {
             str = str.replaceAll(",", ".");
@@ -50,12 +45,5 @@ public class TripCalculator {
 
     public LinkedList<Route> getRoutes() {
         return routes;
-    }
-
-    public static void main(String[] args) {
-        for(Route route : TripCalculator.getInstance().getRoutes())
-        {
-            System.out.println(route.toString());
-        }
     }
 }
