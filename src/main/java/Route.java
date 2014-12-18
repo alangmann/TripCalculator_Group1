@@ -1,13 +1,9 @@
-public class Route {
+public class Route extends RouteTypes {
 
     private double km;
     private double slope;
     private RouteType type;
     private double fee;
-
-    public enum RouteType {
-        COUNTRYROAD, HIGHWAY, GRAVELROAD, UNDEFINED
-    }
 
     public Route(double km, double slope, String type, double fee) {
         this.km = km;
