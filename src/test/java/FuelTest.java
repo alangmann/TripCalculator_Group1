@@ -1,0 +1,24 @@
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
+
+public class FuelTest {
+
+    private Fuel testFuel;
+
+    @Before
+    public void setUp() {
+        testFuel = Fuel.getInstace();
+    }
+
+    @Test
+    public void dieselGetsDiesel () {
+        assertTrue(testFuel.getDiesel(Fuel.Day.MONDAY) > 0);
+    }
+
+    @Test
+    public void petrolGetsPetrol () {
+        assertTrue(testFuel.getPetrol(Fuel.Day.MONDAY) > 0);
+    }
+}

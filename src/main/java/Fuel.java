@@ -3,26 +3,21 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
 
-public class Sprit {
+public class Fuel {
 
-    private static Sprit instance;
-    private HashMap<Day, double[]> spritMap = new HashMap<Day, double[]>();
     private static final String PATH = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "sprit_db.csv";
+    private static Fuel instance;
+    private HashMap<Day, double[]> fuelMap = new HashMap<>();
 
-    public enum Day {
-        SUNDAY, MONDAY, TUESDAY, WEDNESDAY,
-        THURSDAY, FRIDAY, SATURDAY
-    }
-
-    private Sprit() throws Exception {
+    private Fuel() throws Exception {
         loadData();
     }
 
-    public static Sprit getInstace()
+    public static Fuel getInstace()
     {
         if(instance == null){
             try {
-                instance = new Sprit();
+                instance = new Fuel();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -38,7 +33,7 @@ public class Sprit {
             line = line.replace(",", ".");
             String props[] = line.split(";");
             double[] values =  {Double.parseDouble(props[1]), Double.parseDouble(props[2])};
-            spritMap.put(stringToDay(props[0]), values);
+            fuelMap.put(stringToDay(props[0]), values);
         }
         reader.close();
     }
@@ -64,10 +59,15 @@ public class Sprit {
     }
 
     public Double getDiesel(Day day) {
-        return spritMap.get(day)[0];
+        return fuelMap.get(day)[0];
     }
 
     public Double getPetrol(Day day) {
-        return spritMap.get(day)[1];
+        return fuelMap.get(day)[1];
+    }
+
+    public enum Day {
+        SUNDAY, MONDAY, TUESDAY, WEDNESDAY,
+        THURSDAY, FRIDAY, SATURDAY
     }
 }
