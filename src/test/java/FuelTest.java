@@ -9,7 +9,7 @@ public class FuelTest {
 
     @Before
     public void setUp() {
-        testFuel = Fuel.getInstace();
+        testFuel = Fuel.getInstance();
     }
 
     @Test
