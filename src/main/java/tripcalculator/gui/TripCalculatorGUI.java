@@ -1,14 +1,13 @@
+package tripcalculator.gui;
+
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by Lukas on 20.12.2014.
- */
 public class TripCalculatorGUI extends JFrame {
 
     public TripCalculatorGUI()
     {
-        super("TripCalculator");
+        super("tripcalculator.bl.TripCalculator");
 
         init();
     }
@@ -29,6 +28,6 @@ public class TripCalculatorGUI extends JFrame {
         new TripCalculatorGUI();
     }
 
-    public JRadioButton btCar = new JRadioButton("Car");
-    public JRadioButton btTruck = new JRadioButton("Truck");
+    public JRadioButton btCar = new JRadioButton("tripcalculator.vehicle.Car");
+    public JRadioButton btTruck = new JRadioButton("tripcalculator.vehicle.Truck");
 }

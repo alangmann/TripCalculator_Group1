@@ -1,3 +1,5 @@
+package tripcalculator.fuel;
+
 public class FuelTypes {
 
     protected enum FuelType {

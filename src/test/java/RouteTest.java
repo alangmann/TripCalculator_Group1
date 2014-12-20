@@ -1,9 +1,11 @@
 import org.junit.Before;
 import org.junit.Test;
+import tripcalculator.route.Route;
+import tripcalculator.route.RouteTypes;
 
 import static org.junit.Assert.assertTrue;
 
-public class RouteTest extends RouteTypes{
+public class RouteTest extends RouteTypes {
 
     private Route testRoute;
 

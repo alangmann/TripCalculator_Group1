@@ -1,3 +1,5 @@
+package tripcalculator.route;
+
 public class Route extends RouteTypes {
 
     private double km;

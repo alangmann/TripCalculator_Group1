@@ -1,12 +1,18 @@
+package tripcalculator.bl;
+
+import tripcalculator.fuel.Fuel;
+import tripcalculator.route.Route;
+import tripcalculator.route.RouteTypes;
+import tripcalculator.vehicle.Car;
+import tripcalculator.vehicle.Truck;
+import tripcalculator.vehicle.Vehicle;
+
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 
-public class TripCalculator extends RouteTypes{
-
-    private static final String fileName = System.getProperty("user.dir").replace("\\src\\test", "") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "routes.csv";
+public class TripCalculator extends RouteTypes {
 
     private static TripCalculator calculator = new TripCalculator();
     private Fuel fuel;
@@ -16,7 +22,7 @@ public class TripCalculator extends RouteTypes{
         try {
             loadData();
         } catch (IOException e) {
-            System.out.println("Failed in TripCalculator - " + e.getMessage());
+            System.out.println("Failed in tripcalculator.bl.TripCalculator - " + e.getMessage());
         }
     }
 
@@ -26,8 +32,7 @@ public class TripCalculator extends RouteTypes{
 
     private void loadData() throws IOException {
         fuel = Fuel.getInstance();
-
-        FileReader fr = new FileReader(fileName);
+        FileReader fr = new FileReader(getClass().getResource("routes.csv").getFile());
         BufferedReader br = new BufferedReader(fr);
 
         String str;

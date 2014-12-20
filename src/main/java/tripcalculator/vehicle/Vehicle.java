@@ -1,4 +1,8 @@
-public class Vehicle extends FuelTypes{
+package tripcalculator.vehicle;
+
+import tripcalculator.fuel.FuelTypes;
+
+public class Vehicle extends FuelTypes {
 
     private double averageConsumption;
     private FuelType typeOfFuel;

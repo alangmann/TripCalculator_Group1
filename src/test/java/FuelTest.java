@@ -1,5 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
+import tripcalculator.fuel.Fuel;
 
 import static org.junit.Assert.assertTrue;
 

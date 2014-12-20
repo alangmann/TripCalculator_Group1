@@ -1,5 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
+import tripcalculator.fuel.FuelTypes;
+import tripcalculator.vehicle.Vehicle;
+
 import static org.junit.Assert.assertTrue;
 
 public class VehicleTest extends FuelTypes {

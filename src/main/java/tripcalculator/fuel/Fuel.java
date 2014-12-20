@@ -1,15 +1,15 @@
+package tripcalculator.fuel;
+
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
 
 public class Fuel {
 
-    private static final String PATH = System.getProperty("user.dir").replace("\\src\\test", "") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "sprit_db.csv";
     private static Fuel instance;
     private HashMap<Day, double[]> fuelMap = new HashMap<>();
 
-    private Fuel() throws Exception {
+    public Fuel() throws Exception {
         loadData();
     }
 
@@ -26,7 +26,7 @@ public class Fuel {
     }
 
     private void loadData() throws Exception {
-        FileReader fr = new FileReader(PATH);
+        FileReader fr = new FileReader(getClass().getResource("sprit_db.csv").getFile());
         BufferedReader reader = new BufferedReader(fr);
         String line;
         while((line = reader.readLine()) != null) {
