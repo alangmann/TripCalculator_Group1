@@ -1,7 +1,5 @@
 import org.junit.Before;
 import org.junit.Test;
-import java.io.IOException;
-import java.util.Locale;
 
 import static org.junit.Assert.assertTrue;
 
@@ -32,30 +30,5 @@ public class RouteTest extends RouteTypes{
     @Test
     public void routeReturns5Fee() {
         assertTrue(testRoute.getFee() == 5);
-    }
-
-    @Test
-    public void CO2ConsumptionFor10kmAnd5mSlopeReturns1comma325() {
-        assertTrue(String.format(Locale.US, "%.3f", (new Route(10, 5, "test", 1).getCO2Consumption())).equals("1.326"));
-    }
-
-    @Test
-    public void CO2ConsumptionFor20kmAnd5mSlopeReturns2comma640() {
-        assertTrue(String.format(Locale.US, "%.3f", (new Route(20, 5, "test", 1).getCO2Consumption())).equals("2.651"));
-    }
-
-    @Test
-    public void CO2ConsumptionFor25kmAnd88mSlopeReturns3comma324() {
-        assertTrue(String.format(Locale.US, "%.3f", (new Route(25, 88, "test", 1).getCO2Consumption())).equals("3.324"));
-    }
-
-    @Test
-    public void CO2ConsumptionFor1kmAnd50mSlopeReturns0() {
-        assertTrue(new Route(1, -50, "test", 1).getCO2Consumption()==0);
-    }
-
-    @Test
-    public void GravelroadIsDoubleHighway() {
-        assertTrue(new Route(1, -50, "Highway", 1).getCO2Consumption()*2==new Route(1, -50, "Gravelroad", 1).getCO2Consumption());
     }
 }
