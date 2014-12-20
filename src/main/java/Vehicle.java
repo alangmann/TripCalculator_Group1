@@ -9,4 +9,16 @@ public class Vehicle extends FuelTypes{
         this.typeOfFuel = getFuelTypeFormString(typeOfFuel);
         this.averageConsumption = averageConsumption;
     }
+
+    public double getAverageConsumption() {
+        return averageConsumption;
+    }
+
+    public FuelType getTypeOfFuel() {
+        return typeOfFuel;
+    }
+
+    public int getCargo() {
+        return cargo;
+    }
 }
