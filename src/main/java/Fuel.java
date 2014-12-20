@@ -13,7 +13,7 @@ public class Fuel {
         loadData();
     }
 
-    public static Fuel getInstace()
+    public static Fuel getInstance()
     {
         if(instance == null){
             try {
