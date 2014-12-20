@@ -8,4 +8,12 @@ public class Truck extends Vehicle{
         this.adBlue = adBlue;
         this.axles = axles;
     }
+
+    public int getAxles() {
+        return axles;
+    }
+
+    public boolean isAdBlue() {
+        return adBlue;
+    }
 }
