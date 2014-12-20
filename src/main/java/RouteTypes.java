@@ -13,4 +13,21 @@ public class RouteTypes {
         factorMap.put(RouteType.GRAVELROAD, 2.);
         factorMap.put(RouteType.UNDEFINED, 1.);
     }
+
+    protected RouteType getRouteTypeFormString(String type)
+    {
+        if(type.equalsIgnoreCase("countryroad"))
+        {
+            return RouteType.COUNTRYROAD;
+        }
+        if(type.equalsIgnoreCase("highway"))
+        {
+            return RouteType.HIGHWAY;
+        }
+        if(type.equalsIgnoreCase("gravelroad"))
+        {
+            return RouteType.GRAVELROAD;
+        }
+        return RouteType.UNDEFINED;
+    }
 }

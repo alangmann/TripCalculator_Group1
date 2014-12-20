@@ -9,17 +9,4 @@ public class Vehicle extends FuelTypes{
         this.typeOfFuel = getFuelTypeFormString(typeOfFuel);
         this.averageConsumption = averageConsumption;
     }
-
-    private FuelType getFuelTypeFormString(String type)
-    {
-        if(type.equalsIgnoreCase("diesel"))
-        {
-            return FuelType.DIESEL;
-        }
-        if(type.equalsIgnoreCase("patrol"))
-        {
-            return FuelType.PATROL;
-        }
-        return FuelType.UNDEFINED;
-    }
 }

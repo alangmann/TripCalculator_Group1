@@ -22,23 +22,6 @@ public class Route extends RouteTypes {
         return km * 0.1325 * (slope / (km * 1000) + 1) * factorMap.get(type);
     }
 
-    private RouteType getRouteTypeFormString(String type)
-    {
-        if(type.equalsIgnoreCase("countryroad"))
-        {
-            return RouteType.COUNTRYROAD;
-        }
-        if(type.equalsIgnoreCase("highway"))
-        {
-            return RouteType.HIGHWAY;
-        }
-        if(type.equalsIgnoreCase("gravelroad"))
-        {
-            return RouteType.GRAVELROAD;
-        }
-        return RouteType.UNDEFINED;
-    }
-
     public double getKm() {
         return km;
     }
