@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 
-public class TripCalculator {
+public class TripCalculator extends RouteTypes{
 
     private static final String fileName = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "routes.csv";
 
@@ -46,6 +46,19 @@ public class TripCalculator {
             }
         }
         br.close();
+    }
+
+    public double calculateCo2Consumption(Route route, Vehicle vehicle)
+    {
+        double slope = route.getSlope();
+        double km = route.getKm();
+        RouteType type = route.getType();
+        double slopePercent = (slope * 1000) / km;
+        if(slopePercent <= -5)
+        {
+            return 0;
+        }
+        return km * 0.1325 * (slope / (km * 1000) + 1) * factorMap.get(type);
     }
 
     public LinkedList<Route> getRoutes() {

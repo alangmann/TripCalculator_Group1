@@ -12,16 +12,6 @@ public class Route extends RouteTypes {
         this.fee = fee;
     }
 
-    public double getCO2Consumption()
-    {
-        double slopePercent = (slope * 1000) / km;
-        if(slopePercent <= -5)
-        {
-            return 0;
-        }
-        return km * 0.1325 * (slope / (km * 1000) + 1) * factorMap.get(type);
-    }
-
     public double getKm() {
         return km;
     }
