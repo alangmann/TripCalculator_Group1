@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Fuel {
 
-    private static final String PATH = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "sprit_db.csv";
+    private static final String PATH = System.getProperty("user.dir").replace("\\src\\test", "") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "sprit_db.csv";
     private static Fuel instance;
     private HashMap<Day, double[]> fuelMap = new HashMap<>();
 
