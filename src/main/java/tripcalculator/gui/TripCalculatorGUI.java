@@ -1,5 +1,7 @@
 package tripcalculator.gui;
 
+import com.jgoodies.looks.windows.WindowsLookAndFeel;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -25,9 +27,13 @@ public class TripCalculatorGUI extends JFrame {
     }
 
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(new WindowsLookAndFeel());
+        } catch (Exception e) { }
         new TripCalculatorGUI();
     }
 
-    public JRadioButton btCar = new JRadioButton("tripcalculator.vehicle.Car");
-    public JRadioButton btTruck = new JRadioButton("tripcalculator.vehicle.Truck");
+
+    private JToggleButton btCar = new JToggleButton("Car");
+    private JToggleButton btTruck = new JToggleButton("Truck");
 }
