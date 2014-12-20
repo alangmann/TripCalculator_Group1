@@ -9,8 +9,7 @@ public class TripCalculatorGUI extends JFrame {
 
     public TripCalculatorGUI()
     {
-        super("tripcalculator.bl.TripCalculator");
-
+        super("TripCalculator");
         init();
     }
 
@@ -22,8 +21,8 @@ public class TripCalculatorGUI extends JFrame {
         pnRB.add(btCar);
         pnRB.add(btTruck);
 
-        this.getContentPane().add(pnRB);
-        this.setVisible(true);
+        pane.add(pnRB);
+        setVisible(true);
     }
 
     public static void main(String[] args) {
@@ -33,7 +32,7 @@ public class TripCalculatorGUI extends JFrame {
         new TripCalculatorGUI();
     }
 
-
+    private Container pane = getContentPane();
     private JToggleButton btCar = new JToggleButton("Car");
     private JToggleButton btTruck = new JToggleButton("Truck");
 }
