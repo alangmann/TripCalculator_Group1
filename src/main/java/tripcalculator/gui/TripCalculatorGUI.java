@@ -15,8 +15,8 @@ public class TripCalculatorGUI extends JFrame {
 
     private void init() {
         setLayout(new GridLayout(5, 1));
-        setSize(500, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 500);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         JPanel pnRB = new JPanel(new GridLayout(1,2));
@@ -25,6 +25,11 @@ public class TripCalculatorGUI extends JFrame {
 
         pane.add(pnRB);
         setVisible(true);
+
+        int shortSide = btCar.getWidth() < btCar.getHeight() ? btCar.getWidth() : btCar.getHeight();
+        shortSide *= 0.5;
+        btCar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("car.png")).getImage().getScaledInstance(shortSide,shortSide,Image.SCALE_SMOOTH)));
+        btTruck.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("truck.png")).getImage().getScaledInstance(shortSide,shortSide,Image.SCALE_SMOOTH)));
     }
 
     public static void main(String[] args) {
