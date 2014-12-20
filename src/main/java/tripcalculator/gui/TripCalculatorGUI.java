@@ -16,8 +16,12 @@ public class TripCalculatorGUI extends JFrame {
     private void init() {
         setLayout(new GridLayout(5, 1));
         setSize(300, 500);
+        setMinimumSize(new Dimension(200, 400));
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        btgVehicle.add(btCar);
+        btgVehicle.add(btTruck);
 
         JPanel pnRB = new JPanel(new GridLayout(1,2));
         pnRB.add(btCar);
@@ -42,6 +46,7 @@ public class TripCalculatorGUI extends JFrame {
     }
 
     private Container pane = getContentPane();
+    private ButtonGroup btgVehicle = new ButtonGroup();
     private JToggleButton btCar = new JToggleButton("Car");
     private JToggleButton btTruck = new JToggleButton("Truck");
 }
