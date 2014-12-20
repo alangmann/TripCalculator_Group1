@@ -14,8 +14,10 @@ public class TripCalculatorGUI extends JFrame {
     }
 
     private void init() {
-        this.setLayout(new GridLayout(5,1));
-        this.setSize(500,500);
+        setLayout(new GridLayout(5, 1));
+        setSize(500, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
 
         JPanel pnRB = new JPanel(new GridLayout(1,2));
         pnRB.add(btCar);
