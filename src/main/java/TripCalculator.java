@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public class TripCalculator extends RouteTypes{
 
-    private static final String fileName = System.getProperty("user.dir") + File.separator + "trunk" + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "routes.csv";
+    private static final String fileName = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "routes.csv";
 
     private static TripCalculator calculator = new TripCalculator();
     private Fuel fuel;
