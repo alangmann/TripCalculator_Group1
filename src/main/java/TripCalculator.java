@@ -25,7 +25,7 @@ public class TripCalculator extends RouteTypes{
     }
 
     private void loadData() throws IOException {
-        fuel = Fuel.getInstace();
+        fuel = Fuel.getInstance();
 
         FileReader fr = new FileReader(fileName);
         BufferedReader br = new BufferedReader(fr);
@@ -58,7 +58,21 @@ public class TripCalculator extends RouteTypes{
         {
             return 0;
         }
-        return km * 0.1325 * (slope / (km * 1000) + 1) * factorMap.get(type);
+
+        double consumption =(vehicle.getCargo() / 100);
+        if(vehicle instanceof Car)
+        {
+            consumption *= 0.5;
+        }
+        else
+        {
+            if(vehicle instanceof Truck)
+            {
+                consumption *= 0.05;
+            }
+        }
+        consumption += vehicle.getAverageConsumption();
+        return km * (0.1325 * consumption / 5) * (slope / (km * 1000) + 1) * factorMap.get(type);
     }
 
     public LinkedList<Route> getRoutes() {
