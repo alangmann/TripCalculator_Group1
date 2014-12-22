@@ -23,7 +23,7 @@ public class TripCalculatorGUI extends JFrame {
     }
 
     private void init() {
-        this.setSize(500,500);
+        this.setSize(500, 500);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
@@ -44,8 +44,8 @@ public class TripCalculatorGUI extends JFrame {
     }
 
     private void onAdd() {
-
-        new AddTripDialog(this, true);
+        AddTripDialog dialog = new AddTripDialog(this, true);
+        dialog.setVisible(true);
     }
 
     public static void main(String[] args) {

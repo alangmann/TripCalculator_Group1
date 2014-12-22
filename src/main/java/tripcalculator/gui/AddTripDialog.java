@@ -31,22 +31,20 @@ public class AddTripDialog extends JDialog {
         cbFuelType.addItem("Diesel");
         cbFuelType.addItem("Patrol");
 
-        setVisible(true);
-
         colorEverything();
 
-        pane.add(btCar);
-        pane.add(btTruck);
-        pane.add(lbAverageConsumption);
-        pane.add(tfAverageConsumption);
-        pane.add(lbFuelType);
-        pane.add(cbFuelType);
-        pane.add(lbCargo);
-        pane.add(tfCargo);
-        pane.add(lbAxles);
-        pane.add(tfAxles);
-        pane.add(lbBlue);
-        pane.add(cbBlue);
+        add(btCar);
+        add(btTruck);
+        add(lbAverageConsumption);
+        add(tfAverageConsumption);
+        add(lbFuelType);
+        add(cbFuelType);
+        add(lbCargo);
+        add(tfCargo);
+        add(lbAxles);
+        add(tfAxles);
+        add(lbBlue);
+        add(cbBlue);
     }
 
     @Override
