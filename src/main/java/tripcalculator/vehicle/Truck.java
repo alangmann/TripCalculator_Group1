@@ -18,4 +18,26 @@ public class Truck extends Vehicle{
     public boolean isAdBlue() {
         return adBlue;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Truck)) return false;
+        if (!super.equals(o)) return false;
+
+        Truck truck = (Truck) o;
+
+        if (adBlue != truck.adBlue) return false;
+        if (axles != truck.axles) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + axles;
+        result = 31 * result + (adBlue ? 1 : 0);
+        return result;
+    }
 }
