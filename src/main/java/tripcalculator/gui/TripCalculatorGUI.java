@@ -4,9 +4,15 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
 import tripcalculator.fuel.FuelTypes;
 
 import javax.swing.*;
+import javax.swing.text.NumberFormatter;
 import java.awt.*;
+import java.text.NumberFormat;
 
 public class TripCalculatorGUI extends JFrame {
+
+    public final static Color COLOR_DARK = new Color(47, 117, 181);
+    public final static Color COLOR_MEDIUM = new Color(155, 194, 230);
+    public final static Color COLOR_LIGHT = new Color(189, 214, 238);
 
     public TripCalculatorGUI()
     {
@@ -26,24 +32,45 @@ public class TripCalculatorGUI extends JFrame {
 
         btCar.setSelected(true);
 
+        cbFuelType.addItem("Diesel");
+        cbFuelType.addItem("Patrol");
+
+        colorEverything();
+
         pane.add(btCar);
         pane.add(btTruck);
-        pane.add(new JLabel("Average Consumption"));
+        pane.add(lbAverageConsumption);
         pane.add(tfAverageConsumption);
-        pane.add(new JLabel("Fuel Type"));
+        pane.add(lbFuelType);
         pane.add(cbFuelType);
-        pane.add(new JLabel("Cargo"));
+        pane.add(lbCargo);
         pane.add(tfCargo);
-        pane.add(new JLabel("Axles"));
+        pane.add(lbAxles);
         pane.add(tfAxles);
         setVisible(true);
-        pane.add(new JLabel("Blue"));
+        pane.add(lbBlue);
         pane.add(cbBlue);
 
         int shortSide = btCar.getWidth() < btCar.getHeight() ? btCar.getWidth() : btCar.getHeight();
         shortSide *= 0.5;
         btCar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("car.png")).getImage().getScaledInstance(shortSide,shortSide,Image.SCALE_SMOOTH)));
         btTruck.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("truck.png")).getImage().getScaledInstance(shortSide,shortSide,Image.SCALE_SMOOTH)));
+    }
+
+    private void colorEverything()
+    {
+        this.setBackground(COLOR_LIGHT);
+
+        btCar.setOpaque(true);
+        btCar.setContentAreaFilled(true);
+        btCar.setBackground(COLOR_MEDIUM);
+        btCar.setForeground(Color.white);
+
+
+        btTruck.setOpaque(true);
+        btTruck.setContentAreaFilled(true);
+        btTruck.setBackground(COLOR_MEDIUM);
+        btTruck.setForeground(Color.white);
     }
 
     public static void main(String[] args) {
@@ -64,4 +91,10 @@ public class TripCalculatorGUI extends JFrame {
     private JTextField tfCargo = new JTextField();
     private JTextField tfAxles = new JTextField();
     private JCheckBox cbBlue = new JCheckBox();
+
+    private MyLabel lbAverageConsumption = new MyLabel("Average Consumption");
+    private MyLabel lbFuelType = new MyLabel("Fuel Type");
+    private MyLabel lbCargo = new MyLabel("Cargo");
+    private MyLabel lbAxles = new MyLabel("Axles");
+    private MyLabel lbBlue = new MyLabel("Blue");
 }
