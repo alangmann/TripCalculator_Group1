@@ -50,4 +50,9 @@ public class Vehicle extends FuelTypes {
         result = 31 * result + cargo;
         return result;
     }
+
+    public String whoAmI()
+    {
+        return "Vehicle";
+    }
 }

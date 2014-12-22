@@ -40,4 +40,9 @@ public class Truck extends Vehicle{
         result = 31 * result + (adBlue ? 1 : 0);
         return result;
     }
+
+    public String whoAmI()
+    {
+        return "Truck";
+    }
 }

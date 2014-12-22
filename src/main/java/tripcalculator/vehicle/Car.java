@@ -22,4 +22,9 @@ public class Car extends Vehicle{
         result = 31 * result + (bla != null ? bla.hashCode() : 0);
         return result;
     }
+
+    public String whoAmI()
+    {
+        return "Car";
+    }
 }
