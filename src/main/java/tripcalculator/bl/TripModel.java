@@ -1,4 +1,4 @@
-package tripcalculator;
+package tripcalculator.bl;
 
 import tripcalculator.beans.Trip;
 

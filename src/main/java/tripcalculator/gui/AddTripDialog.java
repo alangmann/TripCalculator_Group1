@@ -13,6 +13,7 @@ public class AddTripDialog extends JDialog {
     public AddTripDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setTitle("Add");
+        setSize(400, 300);
         setLocationRelativeTo(parent);
         init();
         //this.rootPane.setDefaultButton(btOk);
@@ -20,7 +21,6 @@ public class AddTripDialog extends JDialog {
 
     private void init() {
         setLayout(new GridLayout(6, 2));
-        setSize(400, 300);
         setMinimumSize(new Dimension(400, 300));
 
         btgVehicle.add(btCar);
@@ -50,12 +50,12 @@ public class AddTripDialog extends JDialog {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        /*int shortSide = btCar.getWidth() < btCar.getHeight() ? btCar.getWidth() : btCar.getHeight();
+        int shortSide = btCar.getWidth() < btCar.getHeight() ? btCar.getWidth() : btCar.getHeight();
         shortSide *= 0.5;
         if(shortSide != 0){
             btCar.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("car.png")).getImage().getScaledInstance(shortSide,shortSide,Image.SCALE_SMOOTH)));
             btTruck.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("truck.png")).getImage().getScaledInstance(shortSide,shortSide,Image.SCALE_SMOOTH)));
-        }*/
+        }
     }
 
     private void colorEverything()
@@ -89,7 +89,7 @@ public class AddTripDialog extends JDialog {
 
     }
 
-    private Container pane = getContentPane();
+    private Container pane = this.getContentPane();
     private ButtonGroup btgVehicle = new ButtonGroup();
     private JToggleButton btCar = new JToggleButton();
     private JToggleButton btTruck = new JToggleButton();
