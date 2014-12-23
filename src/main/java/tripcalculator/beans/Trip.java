@@ -48,4 +48,9 @@ public class Trip {
         result = 31 * result + route.hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return vehicle + ";" + route;
+    }
 }

@@ -55,4 +55,9 @@ public class Vehicle extends FuelTypes {
     {
         return "Vehicle";
     }
+
+    @Override
+    public String toString() {
+        return averageConsumption + ";" + typeOfFuel + ";" + cargo;
+    }
 }

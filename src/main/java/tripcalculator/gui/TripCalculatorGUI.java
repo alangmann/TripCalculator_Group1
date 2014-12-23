@@ -35,6 +35,8 @@ public class TripCalculatorGUI extends JFrame {
             }
         });
 
+
+
         menuBar.add(meFile);
         menuBar.add(meAdd);
         meFile.add(miOpen);
@@ -50,7 +52,7 @@ public class TripCalculatorGUI extends JFrame {
 
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(new WindowsLookAndFeel());
+            //UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Failed to load Windows Look and Feel...", "LaF Error", JOptionPane.ERROR_MESSAGE);
         }

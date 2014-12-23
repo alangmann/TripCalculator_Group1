@@ -1,7 +1,6 @@
 package tripcalculator.vehicle;
 
 public class Car extends Vehicle{
-    private String bla;
 
     public Car(int cargo, String typeOfFuel, double averageConsumption) {
         super(cargo, typeOfFuel, averageConsumption);
@@ -18,13 +17,16 @@ public class Car extends Vehicle{
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (bla != null ? bla.hashCode() : 0);
-        return result;
+        return super.hashCode();
     }
 
     public String whoAmI()
     {
         return "Car";
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

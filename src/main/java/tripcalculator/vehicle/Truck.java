@@ -45,4 +45,9 @@ public class Truck extends Vehicle{
     {
         return "Truck";
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + ";" + axles + ";" + adBlue;
+    }
 }

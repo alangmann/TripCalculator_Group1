@@ -64,12 +64,12 @@ public class AddTripDialog extends JDialog {
 
         btCar.setOpaque(true);
         btCar.setContentAreaFilled(true);
-        btCar.setBackground(TripCalculatorGUI.COLOR_MEDIUM);
+        btCar.setBackground(TripCalculatorGUI.COLOR_DARK);
         btCar.setForeground(Color.white);
 
         btTruck.setOpaque(true);
         btTruck.setContentAreaFilled(true);
-        btTruck.setBackground(TripCalculatorGUI.COLOR_MEDIUM);
+        btTruck.setBackground(TripCalculatorGUI.COLOR_DARK);
         btTruck.setForeground(Color.white);
 
         tfAverageConsumption.setFont(new Font("Arial", Font.PLAIN, 20));
