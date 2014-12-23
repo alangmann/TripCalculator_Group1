@@ -113,15 +113,4 @@ public class TripModel extends AbstractTableModel {
         }
         br.close();
     }
-
-    public static void main(String[] args) {
-        TripModel tm = new TripModel();
-        tm.addTrip(new Trip(new Route(5, 5, "highway", 0), new Car(327, "Diesel", 5)));
-        tm.addTrip(new Trip(new Route(17, 3, "GRAVELROAD", 0), new Car(17, "PATROL", 3)));
-        try {
-            tm.saveData();
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    }
 }
