@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class Fuel {
+public class Fuel extends FuelTypes {
 
     private static Fuel instance;
     private HashMap<Day, double[]> fuelMap = new HashMap<>();
@@ -43,7 +43,7 @@ public class Fuel {
         reader.close();
     }
 
-    private Day stringToDay(String day) throws WeekdayFormatException {
+    public Day stringToDay(String day) throws WeekdayFormatException {
         day = day.toLowerCase();
         switch (day) {
             case "sunday":
@@ -62,6 +62,14 @@ public class Fuel {
                 return Day.SATURDAY;
             default:
                 throw new WeekdayFormatException();
+        }
+    }
+
+    public Double getPrice(Day day, FuelType type) {
+        if (type == FuelType.DIESEL) {
+            return getDiesel(day);
+        } else {
+            return getPetrol(day);
         }
     }
 

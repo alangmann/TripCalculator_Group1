@@ -2,6 +2,7 @@ package tripcalculator.bl;
 
 import tripcalculator.beans.WeekdayFormatException;
 import tripcalculator.fuel.Fuel;
+import tripcalculator.fuel.FuelTypes;
 import tripcalculator.route.Route;
 import tripcalculator.route.RouteTypes;
 import tripcalculator.vehicle.Car;
@@ -30,13 +31,10 @@ public class Calculator extends RouteTypes {
         return calculator;
     }
 
-    public Route getRouteById(int id)
-    {
+    public Route getRouteById(int id) {
         Route giveBackRoute = null;
-        for(Route route : routes)
-        {
-            if(route.getRouteID() == id)
-            {
+        for (Route route : routes) {
+            if (route.getRouteID() == id) {
                 giveBackRoute = route;
                 break;
             }
@@ -51,17 +49,15 @@ public class Calculator extends RouteTypes {
 
         String str;
         int id = 1;
-        while((str = br.readLine()) != null)
-        {
+        while ((str = br.readLine()) != null) {
             str = str.replaceAll(",", ".");
             String[] parts = str.split(";");
             double km = Double.parseDouble(parts[0]);
             double slope = Double.parseDouble(parts[1]);
             String type = parts[2];
             double fee = Double.parseDouble(parts[3]);
-            Route route = new Route(id++, km,slope,type,fee);
-            if(!routes.contains(route))
-            {
+            Route route = new Route(id++, km, slope, type, fee);
+            if (!routes.contains(route)) {
                 routes.add(route);
             }
         }
@@ -77,13 +73,7 @@ public class Calculator extends RouteTypes {
             return 0;
         }
         if (vehicle != null) {
-            double consumption = (vehicle.getCargo() / 100);
-            if (vehicle instanceof Car) {
-                consumption *= 0.5;
-            } else if (vehicle instanceof Truck) {
-                consumption *= 0.05;
-            }
-            consumption += vehicle.getAverageConsumption();
+            double consumption = getAvgConsumtion(vehicle);
             return km * (0.1325 * consumption / 5) * (slope / (km * 1000) + 1) * factorMap.get(type);
         } else {
             return km * 0.1325 * (slope / (km * 1000) + 1) * factorMap.get(type);
@@ -92,5 +82,29 @@ public class Calculator extends RouteTypes {
 
     public LinkedList<Route> getRoutes() {
         return routes;
+    }
+
+    private double getAvgConsumtion(Vehicle vehicle) {
+        double consumption = (vehicle.getCargo() / 100);
+        if (vehicle instanceof Car) {
+            consumption *= 0.5;
+        } else if (vehicle instanceof Truck) {
+            consumption *= 0.05;
+        }
+        consumption += vehicle.getAverageConsumption();
+        return consumption;
+    }
+
+    public double calculateTotalCostsOfRoute(Route route, Vehicle vehicle, String dayOfWeek) throws WeekdayFormatException {
+        double slope = route.getSlope();
+        double km = route.getKm();
+        RouteType type = route.getType();
+        double slopePercent = (slope * 1000) / km;
+        if (slopePercent <= -5) {
+            return 0;
+        }
+        double consumption = getAvgConsumtion(vehicle);
+        System.out.println((slope / (km * 1000) + 1));
+        return (km * consumption / 100) * fuel.getPrice(fuel.stringToDay(dayOfWeek), vehicle.getTypeOfFuel()) * (slope / (km * 1000) + 1) + (vehicle instanceof Truck ? ((Truck)vehicle).getAxles() * 1.5 * route.getFee() : 0);
     }
 }
