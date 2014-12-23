@@ -78,6 +78,28 @@ public class TripCalculatorGUI extends JFrame {
         meFile.add(miOpen);
         meFile.add(miSave);
 
+        miOpen.addActionListener(e -> {
+            JFileChooser chooser = new JFileChooser();
+            chooser.showOpenDialog(null);
+            try {
+                tm.loadData(chooser.getSelectedFile());
+            } catch (IOException e1) {
+                JOptionPane.showMessageDialog(null, "Failed to load file.");
+            } catch (WeekdayFormatException e1) {
+                JOptionPane.showMessageDialog(null, "Wrong weekday format.");
+            }
+        });
+
+        miSave.addActionListener(e -> {
+            JFileChooser chooser = new JFileChooser();
+            chooser.showSaveDialog(null);
+            try {
+                tm.saveData(chooser.getSelectedFile());
+            } catch (IOException e1) {
+                JOptionPane.showMessageDialog(null, "Failed to save file.");
+            }
+        });
+
         this.setJMenuBar(menuBar);
         this.getContentPane().add(new JScrollPane(tbTrip));
     }

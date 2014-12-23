@@ -107,6 +107,18 @@ public class TripModel extends AbstractTableModel {
         bw.close();
     }
 
+    public void saveData(File file) throws IOException {
+        FileWriter fw = new FileWriter(file);
+        BufferedWriter bw = new BufferedWriter(fw);
+        for (Trip trip : trips) {
+            bw.write(trip.toString());
+            bw.newLine();
+        }
+        bw.flush();
+        bw.close();
+    }
+
+
     public void loadData() throws IOException, WeekdayFormatException {
         trips.clear();
         FileReader fr = new FileReader(filePath);
@@ -142,6 +154,43 @@ public class TripModel extends AbstractTableModel {
         }
         br.close();
     }
+
+    public void loadData(File file) throws IOException, WeekdayFormatException, NumberFormatException {
+        trips.clear();
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split(";");
+            int routeID = Integer.parseInt(parts[0]);
+            Route route = Calculator.getInstance().getRouteById(routeID);
+            if(route != null)
+            {
+                Vehicle vehicle;
+                Double averageConsumption = Double.parseDouble(parts[1]);
+                String typeOfFuel = parts[2];
+                int cargo = Integer.parseInt(parts[3]);
+
+                if(parts.length > 4)
+                {
+                    boolean adBlue = parts[4].equalsIgnoreCase("true");
+                    int axles = Integer.parseInt(parts[5]);
+
+                    vehicle = new Truck(cargo, typeOfFuel, averageConsumption, adBlue, axles);
+                }
+                else
+                {
+                    vehicle = new Car(cargo, typeOfFuel, averageConsumption);
+                }
+
+                Trip trip = new Trip(route, vehicle);
+
+                this.addTrip(trip);
+            }
+        }
+        br.close();
+    }
+
 
 
 }
