@@ -1,5 +1,6 @@
 package tripcalculator.bl;
 
+import tripcalculator.beans.WeekdayFormatException;
 import tripcalculator.fuel.Fuel;
 import tripcalculator.route.Route;
 import tripcalculator.route.RouteTypes;
@@ -9,6 +10,7 @@ import tripcalculator.vehicle.Vehicle;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class TripCalculator extends RouteTypes {
@@ -17,11 +19,11 @@ public class TripCalculator extends RouteTypes {
     private Fuel fuel;
     private LinkedList<Route> routes = new LinkedList<>();
 
-    private TripCalculator() throws Exception {
+    private TripCalculator() throws IOException, WeekdayFormatException {
         loadData();
     }
 
-    public static TripCalculator getInstance() throws Exception {
+    public static TripCalculator getInstance() throws IOException, WeekdayFormatException {
         if (calculator == null) {
             calculator = new TripCalculator();
         }
@@ -42,7 +44,7 @@ public class TripCalculator extends RouteTypes {
         return giveBackRoute;
     }
 
-    private void loadData() throws Exception {
+    private void loadData() throws IOException, WeekdayFormatException {
         fuel = Fuel.getInstance();
         FileReader fr = new FileReader(getClass().getResource("routes.csv").getFile());
         BufferedReader br = new BufferedReader(fr);

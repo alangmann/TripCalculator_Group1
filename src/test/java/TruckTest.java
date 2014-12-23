@@ -52,7 +52,7 @@ public class TruckTest extends FuelTypes {
 
     @Test
     public void toStringReturnsValues() {
-        assertTrue(testTruck1.toString().equals("8.0;PATROL;1000;3;true"));
+        assertTrue(testTruck1.toString().equals("8.0;PATROL;1000;true;3"));
     }
 
 }

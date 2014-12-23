@@ -1,16 +1,10 @@
 package tripcalculator.gui;
 
-import tripcalculator.beans.Trip;
-import tripcalculator.bl.TripCalculator;
+import tripcalculator.beans.WeekdayFormatException;
 import tripcalculator.bl.TripModel;
-import tripcalculator.route.Route;
-import tripcalculator.vehicle.Car;
-import tripcalculator.vehicle.Truck;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -25,9 +19,9 @@ public class TripCalculatorGUI extends JFrame {
 
     public TripCalculatorGUI(){
         try {
-            tm.loadDate();
+            tm.loadData();
             tbTrip.updateUI();
-        } catch (IOException e) {
+        } catch (IOException | WeekdayFormatException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
         init();
@@ -36,7 +30,7 @@ public class TripCalculatorGUI extends JFrame {
     private void init() {
         this.setSize(500, 500);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
 
         meAdd.addMouseListener(new MouseAdapter() {
@@ -67,7 +61,7 @@ public class TripCalculatorGUI extends JFrame {
     }
 
     private JMenuBar menuBar = new JMenuBar();
-    private JMenu meAdd = new JMenu("Add");;
+    private JMenu meAdd = new JMenu("Add");
     private JMenu meFile = new JMenu("File");
     private JMenuItem miOpen = new JMenuItem("Open");
     private JMenuItem miSave = new JMenuItem("Save");

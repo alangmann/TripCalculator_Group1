@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 import tripcalculator.beans.Trip;
+import tripcalculator.beans.WeekdayFormatException;
 import tripcalculator.bl.TripModel;
 import tripcalculator.route.Route;
 import tripcalculator.vehicle.Car;
@@ -24,7 +25,7 @@ public class TripModelTest {
     @Before
     public void setUp() {
         testTripModel = new TripModel();
-        testRoute = new Route(10, 5, "Highway", 5);
+        testRoute = new Route(1, 10, 5, "Highway", 5);
         testCar = new Car(100, "diesel", 5);
         testCar2 = new Car(200, "diesel", 6);
         testTruck = new Truck(1000, "diesel", 5, true, 3);
@@ -126,7 +127,7 @@ public class TripModelTest {
     }
 
     @Test
-    public void testSaveLoadData() throws IOException {
+    public void testSaveLoadData() throws IOException, WeekdayFormatException {
         testTripModel.saveData();
         testTripModel.addTrip(testTrip3);
         testTripModel.loadData();

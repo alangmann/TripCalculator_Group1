@@ -1,7 +1,10 @@
 package tripcalculator.fuel;
 
+import tripcalculator.beans.WeekdayFormatException;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class Fuel {
@@ -9,18 +12,25 @@ public class Fuel {
     private static Fuel instance;
     private HashMap<Day, double[]> fuelMap = new HashMap<>();
 
-    public Fuel() throws Exception {
+    public Fuel() throws IOException, WeekdayFormatException {
         loadData();
     }
 
-    public static Fuel getInstance() throws Exception {
+    public static Fuel getInstance() throws IOException, WeekdayFormatException {
         if (instance == null) {
             instance = new Fuel();
         }
         return instance;
     }
 
-    private void loadData() throws Exception {
+    public static Fuel getInstance(boolean newInstance) throws IOException, WeekdayFormatException {
+        if (instance == null || newInstance) {
+            instance = new Fuel();
+        }
+        return instance;
+    }
+
+    private void loadData() throws WeekdayFormatException, IOException {
         FileReader fr = new FileReader(getClass().getResource("sprit_db.csv").getFile());
         BufferedReader reader = new BufferedReader(fr);
         String line;
@@ -33,7 +43,7 @@ public class Fuel {
         reader.close();
     }
 
-    private Day stringToDay(String day) throws Exception {
+    private Day stringToDay(String day) throws WeekdayFormatException {
         day = day.toLowerCase();
         switch (day) {
             case "sunday":
@@ -51,7 +61,7 @@ public class Fuel {
             case "saturday":
                 return Day.SATURDAY;
             default:
-                throw new Exception("invalid day");
+                throw new WeekdayFormatException();
         }
     }
 
