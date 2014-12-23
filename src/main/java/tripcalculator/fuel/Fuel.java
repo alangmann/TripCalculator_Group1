@@ -13,14 +13,9 @@ public class Fuel {
         loadData();
     }
 
-    public static Fuel getInstance()
-    {
-        if(instance == null){
-            try {
-                instance = new Fuel();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    public static Fuel getInstance() throws Exception {
+        if (instance == null) {
+            instance = new Fuel();
         }
         return instance;
     }
@@ -29,10 +24,10 @@ public class Fuel {
         FileReader fr = new FileReader(getClass().getResource("sprit_db.csv").getFile());
         BufferedReader reader = new BufferedReader(fr);
         String line;
-        while((line = reader.readLine()) != null) {
+        while ((line = reader.readLine()) != null) {
             line = line.replace(",", ".");
             String props[] = line.split(";");
-            double[] values =  {Double.parseDouble(props[1]), Double.parseDouble(props[2])};
+            double[] values = {Double.parseDouble(props[1]), Double.parseDouble(props[2])};
             fuelMap.put(stringToDay(props[0]), values);
         }
         reader.close();
@@ -40,22 +35,24 @@ public class Fuel {
 
     private Day stringToDay(String day) throws Exception {
         day = day.toLowerCase();
-        if(day.equals("sunday")) {
-            return Day.SUNDAY;
-        } else if (day.equals("monday")) {
-            return Day.MONDAY;
-        } else if (day.equals("tuesday")) {
-            return Day.TUESDAY;
-        } else if (day.equals("wednesday")) {
-            return Day.WEDNESDAY;
-        } else if (day.equals("thursday")) {
-            return Day.THURSDAY;
-        } else if (day.equals("friday")) {
-            return Day.FRIDAY;
-        } else if (day.equals("saturday")) {
-            return Day.SATURDAY;
+        switch (day) {
+            case "sunday":
+                return Day.SUNDAY;
+            case "monday":
+                return Day.MONDAY;
+            case "tuesday":
+                return Day.TUESDAY;
+            case "wednesday":
+                return Day.WEDNESDAY;
+            case "thursday":
+                return Day.THURSDAY;
+            case "friday":
+                return Day.FRIDAY;
+            case "saturday":
+                return Day.SATURDAY;
+            default:
+                throw new Exception("invalid day");
         }
-        throw new Exception("invalid day");
     }
 
     public Double getDiesel(Day day) {

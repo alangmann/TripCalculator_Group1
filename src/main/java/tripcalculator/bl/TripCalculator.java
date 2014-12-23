@@ -9,7 +9,6 @@ import tripcalculator.vehicle.Vehicle;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.LinkedList;
 
 public class TripCalculator extends RouteTypes {
@@ -18,18 +17,18 @@ public class TripCalculator extends RouteTypes {
     private Fuel fuel;
     private LinkedList<Route> routes = new LinkedList<>();
 
-    private TripCalculator() throws IOException {
+    private TripCalculator() throws Exception {
         loadData();
     }
 
-    public static TripCalculator getInstance() throws IOException {
+    public static TripCalculator getInstance() throws Exception {
         if (calculator == null) {
             calculator = new TripCalculator();
         }
         return calculator;
     }
 
-    private void loadData() throws IOException {
+    private void loadData() throws Exception {
         fuel = Fuel.getInstance();
         FileReader fr = new FileReader(getClass().getResource("routes.csv").getFile());
         BufferedReader br = new BufferedReader(fr);

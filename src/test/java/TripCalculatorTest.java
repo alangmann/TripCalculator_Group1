@@ -4,9 +4,7 @@ import tripcalculator.bl.TripCalculator;
 import tripcalculator.route.Route;
 import tripcalculator.vehicle.Car;
 import tripcalculator.vehicle.Truck;
-import tripcalculator.vehicle.Vehicle;
 
-import java.io.IOException;
 import java.util.Locale;
 
 import static org.junit.Assert.assertTrue;
@@ -16,12 +14,12 @@ public class TripCalculatorTest {
     private TripCalculator tripCalculator;
 
     @Before
-    public void setup() throws IOException {
+    public void setup() throws Exception {
         tripCalculator = TripCalculator.getInstance();
     }
 
     @Test
-    public void loadRoutesWorks() throws IOException {
+    public void loadRoutesWorks() throws Exception {
         assertTrue(TripCalculator.getInstance().getRoutes().size() > 0);
     }
 
