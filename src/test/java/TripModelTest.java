@@ -24,7 +24,7 @@ public class TripModelTest {
     @Before
     public void setUp() {
         testTripModel = new TripModel();
-        testRoute = new Route(10, 5, "Highway", 5);
+        testRoute = new Route(1, 10, 5, "Highway", 5);
         testCar = new Car(100, "diesel", 5);
         testCar2 = new Car(200, "diesel", 6);
         testTruck = new Truck(1000, "diesel", 5, true, 3);
@@ -129,7 +129,11 @@ public class TripModelTest {
     public void testSaveLoadData() throws IOException {
         testTripModel.saveData();
         testTripModel.addTrip(testTrip3);
-        testTripModel.loadData();
+        try {
+            testTripModel.loadDate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         assertTrue(testTripModel.getRowCount() == 2);
     }
 }

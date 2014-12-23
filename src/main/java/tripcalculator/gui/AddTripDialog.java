@@ -27,13 +27,18 @@ public class AddTripDialog extends JDialog {
         setTitle("Add");
         setSize(400, 300);
         setLocationRelativeTo(parent);
-        init();
+        try {
+            init();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //this.rootPane.setDefaultButton(btOk);
     }
 
-    private void init() {
+    private void init() throws Exception {
         setLayout(new GridLayout(9, 2));
         setMinimumSize(new Dimension(700, 300));
+
 
         btgVehicle.add(btCar);
         btgVehicle.add(btTruck);
@@ -100,6 +105,7 @@ public class AddTripDialog extends JDialog {
         add(btAdd);
     }
 
+
     private void onAdd(ActionEvent e) {
         try{
             Double averageConsumption = Double.parseDouble(tfAverageConsumption.getText().replace(",", "."));
@@ -126,9 +132,14 @@ public class AddTripDialog extends JDialog {
             }
             newTrip = new Trip(route, vehicle);
             isOk = true;
+            dispose();
         }catch(NumberFormatException ex)
         {
             JOptionPane.showMessageDialog(this, "Average Consumption, Cargo and Axles have to be a NUMBER!", "No Number", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(Exception ex)
+        {
+
         }
     }
 
@@ -192,8 +203,21 @@ public class AddTripDialog extends JDialog {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            onClickRB(e);
+            try {
+                onClickRB(e);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
         }
+    }
+
+    public Trip getNewTrip() {
+        return newTrip;
+    }
+
+    public boolean isOk() {
+
+        return isOk;
     }
 
     class VehicleAction implements ActionListener{
@@ -219,7 +243,7 @@ public class AddTripDialog extends JDialog {
         }
     }
 
-    private void onClickRB(ActionEvent e) {
+    private void onClickRB(ActionEvent e) throws Exception {
         cbRoute.removeAllItems();
         LinkedList<Route> routes = TripCalculator.getInstance().getRoutes();
         if(e == null)

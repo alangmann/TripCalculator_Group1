@@ -10,10 +10,7 @@ import tripcalculator.vehicle.Truck;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.IOException;
 
 public class TripCalculatorGUI extends JFrame {
@@ -30,6 +27,8 @@ public class TripCalculatorGUI extends JFrame {
             tbTrip.updateUI();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         init();
     }
@@ -39,6 +38,18 @@ public class TripCalculatorGUI extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    tm.saveData();
+                } catch (IOException e1) {
+                }
+                finally {
+                    dispose();
+                }
+            }
+        });
 
         meAdd.addMouseListener(new MouseAdapter() {
             @Override
@@ -80,6 +91,10 @@ public class TripCalculatorGUI extends JFrame {
     private void onAdd() {
         AddTripDialog dialog = new AddTripDialog(this, true);
         dialog.setVisible(true);
+        if(dialog.isOk())
+        {
+            tm.addTrip(dialog.getNewTrip());
+        }
     }
 
     public static void main(String[] args) {

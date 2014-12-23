@@ -14,7 +14,7 @@ public class TripTest {
 
     @Before
     public void setUp() throws Exception {
-        testRoute = new Route(10, 5, "Highway", 5);
+        testRoute = new Route(1, 10, 5, "Highway", 5);
         testCar = new Car(100, "diesel", 5);
         testTrip = new Trip(testRoute, testCar);
     }

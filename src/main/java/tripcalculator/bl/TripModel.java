@@ -107,7 +107,7 @@ public class TripModel extends AbstractTableModel {
         bw.close();
     }
 
-    public void loadDate() throws IOException{
+    public void loadDate() throws Exception {
         FileReader fr = new FileReader(filePath);
         BufferedReader br = new BufferedReader(fr);
         String line;
