@@ -35,20 +35,9 @@ public class Vehicle extends FuelTypes {
 
         if (Double.compare(vehicle.averageConsumption, averageConsumption) != 0) return false;
         if (cargo != vehicle.cargo) return false;
-        if (typeOfFuel != vehicle.typeOfFuel) return false;
+        if (typeOfFuel == vehicle.typeOfFuel) return true;
+        else return false;
 
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        temp = Double.doubleToLongBits(averageConsumption);
-        result = (int) (temp ^ (temp >>> 32));
-        result = 31 * result + typeOfFuel.hashCode();
-        result = 31 * result + cargo;
-        return result;
     }
 
     public String whoAmI()

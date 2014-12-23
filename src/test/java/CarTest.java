@@ -34,4 +34,14 @@ public class CarTest extends FuelTypes {
     public void carEqualsCar() {
         assertTrue(testCar.equals(testCar2));
     }
+
+    @Test
+    public void carSaysItsACar() {
+        assertTrue(testCar.whoAmI().equals("Car"));
+    }
+
+    @Test
+    public void toStringReturnsValues() {
+        assertTrue(testCar.toString().equals("5.0;PATROL;1"));
+    }
 }
