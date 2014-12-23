@@ -94,7 +94,7 @@ public class Calculator extends RouteTypes {
         return consumption;
     }
 
-    public double calculateTotalCostsOfRoute(Route route, Vehicle vehicle, String dayOfWeek) throws WeekdayFormatException {
+    public double calculateTotalCostOfRoute(Route route, Vehicle vehicle, String dayOfWeek) throws WeekdayFormatException {
         double slope = route.getSlope();
         double km = route.getKm();
         double slopePercent = (slope * 1000) / km;
