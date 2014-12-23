@@ -42,7 +42,7 @@ public class AddTripDialog extends JDialog {
 
         btCar.setSelected(true);
 
-        onClickBT(null);
+        onClickBT();
 
         cbFuelType.addItem("Diesel");
         cbFuelType.addItem("Patrol");
@@ -60,18 +60,8 @@ public class AddTripDialog extends JDialog {
         panel.add(rbHW);
         panel.add(rbGR);
 
-        btCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-        btAdd.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                onAdd(e);
-            }
-        });
+        btCancel.addActionListener(e -> dispose());
+        btAdd.addActionListener(e -> onAdd());
 
         btCar.addActionListener(new VehicleAction());
         btTruck.addActionListener(new VehicleAction());
@@ -82,28 +72,28 @@ public class AddTripDialog extends JDialog {
 
         rbHW.setSelected(true);
 
-        add(btCar);
-        add(btTruck);
-        add(lbAverageConsumption);
-        add(tfAverageConsumption);
-        add(lbFuelType);
-        add(cbFuelType);
-        add(lbCargo);
-        add(tfCargo);
-        add(lbAxles);
-        add(tfAxles);
-        add(lbBlue);
-        add(cbBlue);
-        add(lbRouteType);
-        add(panel);
-        add(lbRoute);
-        add(cbRoute);
-        add(btCancel);
-        add(btAdd);
+        pane.add(btCar);
+        pane.add(btTruck);
+        pane.add(lbAverageConsumption);
+        pane.add(tfAverageConsumption);
+        pane.add(lbFuelType);
+        pane.add(cbFuelType);
+        pane.add(lbCargo);
+        pane.add(tfCargo);
+        pane.add(lbAxles);
+        pane.add(tfAxles);
+        pane.add(lbBlue);
+        pane.add(cbBlue);
+        pane.add(lbRouteType);
+        pane.add(panel);
+        pane.add(lbRoute);
+        pane.add(cbRoute);
+        pane.add(btCancel);
+        pane.add(btAdd);
     }
 
 
-    private void onAdd(ActionEvent e) {
+    private void onAdd() {
         try{
             Double averageConsumption = Double.parseDouble(tfAverageConsumption.getText().replace(",", "."));
             String fuelType = (String) cbFuelType.getSelectedItem();
@@ -111,19 +101,19 @@ public class AddTripDialog extends JDialog {
             Route route = null;
             for(Route r : Calculator.getInstance().getRoutes())
             {
-                if(r.getCbString().equals((String)cbRoute.getSelectedItem()));
+                if(r.getCbString().equals(cbRoute.getSelectedItem()))
                 {
                     route = r;
                 }
             }
-            Vehicle vehicle = null;
+            Vehicle vehicle;
             if(btCar.isSelected())
             {
                 vehicle = new Car(cargo, fuelType, averageConsumption);
             }
             else
             {
-                int axles = (int)Integer.parseInt(tfAxles.getText().replace(",", "."));
+                int axles = Integer.parseInt(tfAxles.getText().replace(",", "."));
                 boolean adBlue = cbBlue.isSelected();
                 vehicle = new Truck(cargo, fuelType, averageConsumption, adBlue, axles);
             }
@@ -136,7 +126,7 @@ public class AddTripDialog extends JDialog {
         }
         catch(Exception ex)
         {
-
+            JOptionPane.showMessageDialog(this, "Something went wrong...", "Ooops", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -165,35 +155,35 @@ public class AddTripDialog extends JDialog {
         btTruck.setBackground(TripCalculatorGUI.COLOR_DARK);
         btTruck.setForeground(Color.white);
 
-        tfAverageConsumption.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 20));
+        tfAverageConsumption.setFont(new Font("Helvetica", Font.PLAIN, 20));
         tfAverageConsumption.setHorizontalAlignment(JTextField.CENTER);
 
-        cbFuelType.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 20));
+        cbFuelType.setFont(new Font("Helvetica", Font.PLAIN, 20));
         ((JLabel)cbFuelType.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
-        tfCargo.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 20));
+        tfCargo.setFont(new Font("Helvetica", Font.PLAIN, 20));
         tfCargo.setHorizontalAlignment(JTextField.CENTER);
 
-        tfAxles.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 20));
+        tfAxles.setFont(new Font("Helvetica", Font.PLAIN, 20));
         tfAxles.setHorizontalAlignment(JTextField.CENTER);
 
         cbBlue.setHorizontalAlignment(JCheckBox.CENTER);
         cbBlue.setBackground(TripCalculatorGUI.COLOR_LIGHT);
 
-        cbRoute.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 20));
+        cbRoute.setFont(new Font("Helvetica", Font.PLAIN, 20));
         ((JLabel)cbRoute.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
         rbCR.setBackground(TripCalculatorGUI.COLOR_MEDIUM);
         rbCR.setHorizontalAlignment(SwingConstants.CENTER);
-        rbCR.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 20));
+        rbCR.setFont(new Font("Helvetica", Font.PLAIN, 20));
 
         rbHW.setBackground(TripCalculatorGUI.COLOR_MEDIUM);
         rbHW.setHorizontalAlignment(SwingConstants.CENTER);
-        rbHW.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 20));
+        rbHW.setFont(new Font("Helvetica", Font.PLAIN, 20));
 
         rbGR.setBackground(TripCalculatorGUI.COLOR_MEDIUM);
         rbGR.setHorizontalAlignment(SwingConstants.CENTER);
-        rbGR.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 20));
+        rbGR.setFont(new Font("Helvetica", Font.PLAIN, 20));
     }
 
     class RbAction implements ActionListener{
@@ -221,11 +211,11 @@ public class AddTripDialog extends JDialog {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            onClickBT(e);
+            onClickBT();
         }
     }
 
-    private void onClickBT(ActionEvent e) {
+    private void onClickBT() {
         if(btCar.isSelected())
         {
             cbBlue.setSelected(false);

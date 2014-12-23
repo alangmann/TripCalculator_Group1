@@ -3,10 +3,6 @@ package tripcalculator.gui;
 import tripcalculator.beans.WeekdayFormatException;
 import tripcalculator.bl.TripModel;
 import tripcalculator.bl.TripTableRenderer;
-import tripcalculator.route.Route;
-import tripcalculator.vehicle.Car;
-import tripcalculator.vehicle.Truck;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -41,6 +37,7 @@ public class TripCalculatorGUI extends JFrame {
                 try {
                     tm.saveData();
                 } catch (IOException e1) {
+                    JOptionPane.showMessageDialog(null, "Saving failed...");
                 }
                 finally {
                     dispose();
@@ -62,19 +59,19 @@ public class TripCalculatorGUI extends JFrame {
 
         meFile.setBackground(COLOR_DARK);
         meFile.setForeground(Color.white);
-        meFile.setFont(new Font("Agency FB", Font.PLAIN, 25));
+        meFile.setFont(new Font("Helvetica", Font.PLAIN, 25));
 
         meAdd.setBackground(COLOR_DARK);
         meAdd.setForeground(Color.white);
-        meAdd.setFont(new Font("Agency FB", Font.PLAIN, 25));
+        meAdd.setFont(new Font("Helvetica", Font.PLAIN, 25));
 
         miOpen.setBackground(COLOR_MEDIUM);
         miOpen.setForeground(Color.black);
-        miOpen.setFont(new Font("Agency FB", Font.PLAIN, 20));
+        miOpen.setFont(new Font("Helvetica", Font.PLAIN, 20));
 
         miSave.setBackground(COLOR_MEDIUM);
         miSave.setForeground(Color.black);
-        miSave.setFont(new Font("Agency FB", Font.PLAIN, 20));
+        miSave.setFont(new Font("Helvetica", Font.PLAIN, 20));
 
         menuBar.add(meFile);
         menuBar.add(meAdd);
