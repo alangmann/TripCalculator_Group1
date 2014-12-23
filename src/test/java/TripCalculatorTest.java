@@ -3,6 +3,7 @@ import org.junit.Test;
 import tripcalculator.bl.TripCalculator;
 import tripcalculator.route.Route;
 
+import java.io.IOException;
 import java.util.Locale;
 
 import static org.junit.Assert.assertTrue;
@@ -12,12 +13,12 @@ public class TripCalculatorTest {
     private TripCalculator tripCalculator;
 
     @Before
-    public void setup() {
+    public void setup() throws IOException {
         tripCalculator = TripCalculator.getInstance();
     }
 
     @Test
-    public void loadRoutesWorks() {
+    public void loadRoutesWorks() throws IOException {
         assertTrue(TripCalculator.getInstance().getRoutes().size() > 0);
     }
 
