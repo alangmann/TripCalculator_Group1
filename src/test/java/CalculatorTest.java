@@ -72,16 +72,16 @@ public class CalculatorTest {
 
     @Test
     public void exampleCostCalculationReturns34comma73() throws WeekdayFormatException {
-        assertTrue(String.format(Locale.US, "%.2f", (tripCalculator.calculateTotalCostsOfRoute(new Route(1, 10, 500, "test", 5), new Truck(20000, "diesel", 35, true, 4), "monday"))).equals("34.73"));
+        assertTrue(String.format(Locale.US, "%.2f", (tripCalculator.calculateTotalCostOfRoute(new Route(1, 10, 500, "test", 5), new Truck(20000, "diesel", 35, true, 4), "monday"))).equals("34.73"));
     }
 
     @Test
     public void anotherExampleCostCalculationReturns39comma45() throws WeekdayFormatException {
-        assertTrue(String.format(Locale.US, "%.2f", (tripCalculator.calculateTotalCostsOfRoute(new Route(1, 10, 500, "test", 5), new Truck(20000, "petrol", 35, true, 4), "monday"))).equals("39.45"));
+        assertTrue(String.format(Locale.US, "%.2f", (tripCalculator.calculateTotalCostOfRoute(new Route(1, 10, 500, "test", 5), new Truck(20000, "petrol", 35, true, 4), "monday"))).equals("39.45"));
     }
 
     @Test
     public void exampleCostCalculationWithNegSlopeReturns0() throws WeekdayFormatException {
-        assertTrue(tripCalculator.calculateTotalCostsOfRoute(new Route(1, 10, -50000, "test", 5), new Truck(20000, "diesel", 35, true, 4), "monday") == 0);
+        assertTrue(tripCalculator.calculateTotalCostOfRoute(new Route(1, 10, -50000, "test", 5), new Truck(20000, "diesel", 35, true, 4), "monday") == 0);
     }
 }
