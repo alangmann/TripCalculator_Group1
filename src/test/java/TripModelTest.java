@@ -113,12 +113,12 @@ public class TripModelTest {
 
     @Test
     public void testCarErrorGetValueAtWrongIndex() {
-        assertTrue(testTripModel.getValueAt(0, 10).toString().equals("error"));
+        assertTrue(testTripModel.getValueAt(0, 1000).toString().equals("error"));
     }
 
     @Test
     public void testTruckErrorGetValueAtWrongIndex() {
-        assertTrue(testTripModel.getValueAt(1, 10).toString().equals("error"));
+        assertTrue(testTripModel.getValueAt(1, 1000).toString().equals("error"));
     }
 
     @Test
