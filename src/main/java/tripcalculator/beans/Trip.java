@@ -51,6 +51,6 @@ public class Trip {
 
     @Override
     public String toString() {
-        return vehicle + ";" + route;
+        return route + ";" + vehicle;
     }
 }

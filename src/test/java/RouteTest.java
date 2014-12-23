@@ -11,7 +11,7 @@ public class RouteTest extends RouteTypes {
 
     @Before
     public void setUp() {
-        testRoute = new Route(10, 5, "Highway", 5);
+        testRoute = new Route(1, 10, 5, "Highway", 5);
     }
 
     @Test

@@ -9,10 +9,12 @@ import tripcalculator.vehicle.Vehicle;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.util.LinkedList;
 
 public class TripModel extends AbstractTableModel{
 
+    private final String filePath = System.getProperty("user.dir") + File.separator + "trips.csv";
     private LinkedList<Trip> trips = new LinkedList<>();
     private String[] headings = {"KM", "Slope", "Type", "Fee", "Vehicle", "Fuel type", "Cargo", "Consumption", "Blue", "Axles"};
 
@@ -81,36 +83,52 @@ public class TripModel extends AbstractTableModel{
     }
 
     public void saveData() throws IOException {
-        FileWriter fw = new FileWriter(getClass().getResource("trips.csv").getFile());
+        FileWriter fw = new FileWriter(filePath);
         BufferedWriter bw = new BufferedWriter(fw);
         for(Trip trip : trips)
         {
             bw.write(trip.toString());
+            bw.newLine();
         }
         bw.flush();
         bw.close();
     }
 
-    public void loadDate() throws IOException {
-        FileReader fr = new FileReader(getClass().getResource("trips.csv").getFile());
+    public void loadDate() throws IOException{
+        FileReader fr = new FileReader(filePath);
         BufferedReader br = new BufferedReader(fr);
         String line = "";
         while((line = br.readLine()) != null)
         {
             String[] parts = line.split(";");
+            int routeID = Integer.parseInt(parts[0]);
+            Route route = TripCalculator.getInstance().getRouteById(routeID);
+            if(route != null)
+            {
+                Vehicle vehicle = null;
+                Double averageConsumption = Double.parseDouble(parts[1]);
+                String typeOfFuel = parts[2];
+                int cargo = Integer.parseInt(parts[3]);
 
+                if(parts.length > 4)
+                {
+                    boolean adBlue = parts[4].equalsIgnoreCase("true") ? true : false;
+                    int axles = Integer.parseInt(parts[5]);
+
+                    vehicle = new Truck(cargo, typeOfFuel, averageConsumption, adBlue, axles);
+                }
+                else
+                {
+                    vehicle = new Car(cargo, typeOfFuel, averageConsumption);
+                }
+
+                Trip trip = new Trip(route, vehicle);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Loaded Route can't be possible! Not such a Route in routes.csv", "Load Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         br.close();
-    }
-
-    public static void main(String[] args) {
-        TripModel tm = new TripModel();
-        tm.addTrip(new Trip(new Route(5,5,"highway",0), new Car(327, "Diesel", 5)));
-        tm.addTrip(new Trip(new Route(17,3,"GRAVELROAD",0), new Car(17, "PATROL", 3)));
-        try {
-            tm.saveData();
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
     }
 }

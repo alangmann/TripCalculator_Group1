@@ -1,9 +1,11 @@
 package tripcalculator.gui;
 
 import tripcalculator.beans.Trip;
+import tripcalculator.bl.TripCalculator;
 import tripcalculator.bl.TripModel;
 import tripcalculator.route.Route;
 import tripcalculator.vehicle.Car;
+import tripcalculator.vehicle.Truck;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,9 +15,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
-/**
- * Created by Lukas on 22.12.2014.
- */
 public class TripCalculatorGUI extends JFrame {
 
     public final static Color COLOR_DARK = new Color(47, 117, 181);
@@ -26,8 +25,8 @@ public class TripCalculatorGUI extends JFrame {
         init();
 
         TripModel tm = new TripModel();
-        tm.addTrip(new Trip(new Route(5,5,"highway",0), new Car(327, "Diesel", 5)));
-        tm.addTrip(new Trip(new Route(17,3,"GRAVELROAD",0), new Car(17, "PATROL", 3)));
+        tm.addTrip(new Trip(TripCalculator.getInstance().getRouteById(1), new Car(327, "Diesel", 5)));
+        tm.addTrip(new Trip(TripCalculator.getInstance().getRouteById(1), new Truck(17, "PATROL", 3, true, 0)));
         try {
             tm.saveData();
         } catch (IOException e) {
@@ -64,11 +63,6 @@ public class TripCalculatorGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        try {
-            //UIManager.setLookAndFeel(new WindowsLookAndFeel());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Failed to load Windows Look and Feel...", "LaF Error", JOptionPane.ERROR_MESSAGE);
-        }
         new TripCalculatorGUI().setVisible(true);
     }
 
