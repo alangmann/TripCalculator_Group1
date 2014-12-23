@@ -116,7 +116,7 @@ public class TripModel extends AbstractTableModel {
         while ((line = br.readLine()) != null) {
             String[] parts = line.split(";");
             int routeID = Integer.parseInt(parts[0]);
-            Route route = TripCalculator.getInstance().getRouteById(routeID);
+            Route route = Calculator.getInstance().getRouteById(routeID);
             if(route != null)
             {
                 Vehicle vehicle = null;

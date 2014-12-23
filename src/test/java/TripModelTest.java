@@ -131,7 +131,7 @@ public class TripModelTest {
         testTripModel.saveData();
         testTripModel.addTrip(testTrip3);
         try {
-            testTripModel.loadDate();
+            testTripModel.loadData();
         } catch (Exception e) {
             e.printStackTrace();
         }

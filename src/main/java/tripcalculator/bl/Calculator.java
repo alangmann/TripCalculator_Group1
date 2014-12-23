@@ -13,19 +13,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 
-public class TripCalculator extends RouteTypes {
+public class Calculator extends RouteTypes {
 
-    private static TripCalculator calculator;
+    private static Calculator calculator;
     private Fuel fuel;
     private LinkedList<Route> routes = new LinkedList<>();
 
-    private TripCalculator() throws IOException, WeekdayFormatException {
+    private Calculator() throws IOException, WeekdayFormatException {
         loadData();
     }
 
-    public static TripCalculator getInstance() throws IOException, WeekdayFormatException {
+    public static Calculator getInstance() throws IOException, WeekdayFormatException {
         if (calculator == null) {
-            calculator = new TripCalculator();
+            calculator = new Calculator();
         }
         return calculator;
     }

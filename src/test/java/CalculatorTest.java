@@ -1,7 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 import tripcalculator.beans.WeekdayFormatException;
-import tripcalculator.bl.TripCalculator;
+import tripcalculator.bl.Calculator;
 import tripcalculator.route.Route;
 import tripcalculator.vehicle.Car;
 import tripcalculator.vehicle.Truck;
@@ -11,18 +11,18 @@ import java.util.Locale;
 
 import static org.junit.Assert.assertTrue;
 
-public class TripCalculatorTest {
+public class CalculatorTest {
 
-    private TripCalculator tripCalculator;
+    private Calculator tripCalculator;
 
     @Before
     public void setup() throws Exception {
-        tripCalculator = TripCalculator.getInstance();
+        tripCalculator = Calculator.getInstance();
     }
 
     @Test
     public void loadRoutesWorks() throws IOException, WeekdayFormatException {
-        assertTrue(TripCalculator.getInstance().getRoutes().size() > 0);
+        assertTrue(Calculator.getInstance().getRoutes().size() > 0);
     }
 
     @Test

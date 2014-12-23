@@ -1,19 +1,16 @@
 package tripcalculator.gui;
 
 import tripcalculator.beans.Trip;
-import tripcalculator.bl.TripCalculator;
-import tripcalculator.fuel.FuelTypes;
+import tripcalculator.bl.Calculator;
 import tripcalculator.route.Route;
 import tripcalculator.vehicle.Car;
 import tripcalculator.vehicle.Truck;
 import tripcalculator.vehicle.Vehicle;
 
 import javax.swing.*;
-import javax.swing.text.NumberFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
 import java.util.LinkedList;
 
 public class AddTripDialog extends JDialog {
@@ -112,7 +109,7 @@ public class AddTripDialog extends JDialog {
             String fuelType = (String) cbFuelType.getSelectedItem();
             int cargo = (int) Double.parseDouble(tfCargo.getText().replace(",", "."));
             Route route = null;
-            for(Route r : TripCalculator.getInstance().getRoutes())
+            for(Route r : Calculator.getInstance().getRoutes())
             {
                 if(r.getCbString().equals((String)cbRoute.getSelectedItem()));
                 {
@@ -245,7 +242,7 @@ public class AddTripDialog extends JDialog {
 
     private void onClickRB(ActionEvent e) throws Exception {
         cbRoute.removeAllItems();
-        LinkedList<Route> routes = TripCalculator.getInstance().getRoutes();
+        LinkedList<Route> routes = Calculator.getInstance().getRoutes();
         if(e == null)
         {
             for(Route route : routes)
