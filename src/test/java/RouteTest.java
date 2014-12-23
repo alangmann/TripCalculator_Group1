@@ -33,4 +33,9 @@ public class RouteTest extends RouteTypes {
     public void routeReturns5Fee() {
         assertTrue(testRoute.getFee() == 5);
     }
+
+    @Test
+    public void getCbStringReturnsReadableString () {
+        assertTrue(testRoute.getCbString().equals("10km 5slope 5€ fee"));
+    }
 }

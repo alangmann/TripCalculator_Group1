@@ -7,7 +7,6 @@ import tripcalculator.vehicle.Car;
 import tripcalculator.vehicle.Truck;
 import tripcalculator.vehicle.Vehicle;
 
-import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.io.*;
 import java.util.LinkedList;
@@ -119,14 +118,14 @@ public class TripModel extends AbstractTableModel {
             Route route = Calculator.getInstance().getRouteById(routeID);
             if(route != null)
             {
-                Vehicle vehicle = null;
+                Vehicle vehicle;
                 Double averageConsumption = Double.parseDouble(parts[1]);
                 String typeOfFuel = parts[2];
                 int cargo = Integer.parseInt(parts[3]);
 
                 if(parts.length > 4)
                 {
-                    boolean adBlue = parts[4].equalsIgnoreCase("true") ? true : false;
+                    boolean adBlue = parts[4].equalsIgnoreCase("true");
                     int axles = Integer.parseInt(parts[5]);
 
                     vehicle = new Truck(cargo, typeOfFuel, averageConsumption, adBlue, axles);
@@ -139,10 +138,6 @@ public class TripModel extends AbstractTableModel {
                 Trip trip = new Trip(route, vehicle);
 
                 this.addTrip(trip);
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null,"Loaded Route impossible! Not such a Route in routes.csv", "Load Error", JOptionPane.ERROR_MESSAGE);
             }
         }
         br.close();

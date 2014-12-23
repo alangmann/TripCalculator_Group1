@@ -59,4 +59,9 @@ public class CalculatorTest {
     public void exampleTruckCalculationReturns1comma458() {
         assertTrue(String.format(Locale.US, "%.3f", (tripCalculator.calculateCo2Consumption(new Route(1, 10, 0, "test", 0), new Truck(1000, "test", 5, false, 3)))).equals("1.458"));
     }
+
+    @Test
+    public void idGetsRoute() {
+        assertTrue(tripCalculator.getRouteById(1).getRouteID() == 1);
+    }
 }
