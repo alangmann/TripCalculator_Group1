@@ -2,7 +2,6 @@ package tripcalculator.bl;
 
 import tripcalculator.beans.WeekdayFormatException;
 import tripcalculator.fuel.Fuel;
-import tripcalculator.fuel.FuelTypes;
 import tripcalculator.route.Route;
 import tripcalculator.route.RouteTypes;
 import tripcalculator.vehicle.Car;
@@ -98,13 +97,11 @@ public class Calculator extends RouteTypes {
     public double calculateTotalCostsOfRoute(Route route, Vehicle vehicle, String dayOfWeek) throws WeekdayFormatException {
         double slope = route.getSlope();
         double km = route.getKm();
-        RouteType type = route.getType();
         double slopePercent = (slope * 1000) / km;
         if (slopePercent <= -5) {
             return 0;
         }
         double consumption = getAvgConsumtion(vehicle);
-        System.out.println((slope / (km * 1000) + 1));
         return (km * consumption / 100) * fuel.getPrice(fuel.stringToDay(dayOfWeek), vehicle.getTypeOfFuel()) * (slope / (km * 1000) + 1) + (vehicle instanceof Truck ? ((Truck)vehicle).getAxles() * 1.5 * route.getFee() : 0);
     }
 }
