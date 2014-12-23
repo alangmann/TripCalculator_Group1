@@ -9,13 +9,16 @@ import tripcalculator.vehicle.Vehicle;
 
 import javax.swing.table.AbstractTableModel;
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 
 public class TripModel extends AbstractTableModel {
 
     private final String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "tripcalculator" + File.separator + "bl" + File.separator +  "trips.csv";
     private LinkedList<Trip> trips = new LinkedList<>();
-    private String[] headings = {"KM", "Slope", "Type", "Fee", "Vehicle", "Fuel type", "Cargo", "Consumption", "Blue", "Axles"};
+    private String[] headings = {"KM", "Slope", "Type", "Fee", "Vehicle", "Fuel type", "Cargo", "Consumption", "Blue", "Axles", "Total Costs"};
 
     public void addTrip(Trip trip) {
         if (!trips.contains(trip)) {
@@ -46,6 +49,7 @@ public class TripModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Trip trip = trips.get(rowIndex);
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
         switch (columnIndex) {
             case 0:
                 return trip.getRoute().getKm();
@@ -55,6 +59,14 @@ public class TripModel extends AbstractTableModel {
                 return trip.getRoute().getType();
             case 3:
                 return trip.getRoute().getFee();
+            case 10:
+                try {
+                    return String.format("%3.2f €", Calculator.getInstance().calculateTotalCostsOfRoute(trip.getRoute(), trip.getVehicle(), sdf.format(new Date())));
+                } catch (WeekdayFormatException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             default:
                 Vehicle vehicle = trip.getVehicle();
                 switch (columnIndex) {
@@ -143,5 +155,9 @@ public class TripModel extends AbstractTableModel {
         br.close();
     }
 
+    public static void main(String[] args) {
 
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        System.out.println(sdf.format(new Date()));
+    }
 }

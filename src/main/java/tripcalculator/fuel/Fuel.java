@@ -47,18 +47,25 @@ public class Fuel extends FuelTypes {
         day = day.toLowerCase();
         switch (day) {
             case "sunday":
+            case "sonntag":
                 return Day.SUNDAY;
             case "monday":
+            case "montag":
                 return Day.MONDAY;
             case "tuesday":
+            case "dienstag":
                 return Day.TUESDAY;
             case "wednesday":
+            case "mittwoch":
                 return Day.WEDNESDAY;
             case "thursday":
+            case "donnerstag":
                 return Day.THURSDAY;
             case "friday":
+            case "freitag":
                 return Day.FRIDAY;
             case "saturday":
+            case "samstag":
                 return Day.SATURDAY;
             default:
                 throw new WeekdayFormatException();
