@@ -7,6 +7,7 @@ import tripcalculator.route.Route;
 import tripcalculator.vehicle.Car;
 import tripcalculator.vehicle.Truck;
 
+import java.io.File;
 import java.io.IOException;
 
 import static org.junit.Assert.*;
@@ -132,6 +133,18 @@ public class TripModelTest {
         testTripModel.addTrip(testTrip3);
         try {
             testTripModel.loadData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertTrue(testTripModel.getRowCount() == 2);
+    }
+
+    @Test
+    public void testSaveLoadDataWithPaths() throws IOException, WeekdayFormatException {
+        testTripModel.saveData(new File("test.csv"));
+        testTripModel.addTrip(testTrip3);
+        try {
+            testTripModel.loadData(new File("test.csv"));
         } catch (Exception e) {
             e.printStackTrace();
         }
