@@ -10,7 +10,6 @@ import tripcalculator.vehicle.Vehicle;
 import javax.swing.table.AbstractTableModel;
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -62,9 +61,7 @@ public class TripModel extends AbstractTableModel {
             case 10:
                 try {
                     return String.format("%3.2f €", Calculator.getInstance().calculateTotalCostOfRoute(trip.getRoute(), trip.getVehicle(), sdf.format(new Date())));
-                } catch (WeekdayFormatException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
+                } catch (WeekdayFormatException | IOException e) {
                     e.printStackTrace();
                 }
             default:
@@ -201,12 +198,5 @@ public class TripModel extends AbstractTableModel {
             }
         }
         br.close();
-    }
-
-
-    public static void main(String[] args) {
-
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
-        System.out.println(sdf.format(new Date()));
     }
 }
