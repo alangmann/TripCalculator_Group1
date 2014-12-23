@@ -14,7 +14,7 @@ import java.util.LinkedList;
 
 public class TripModel extends AbstractTableModel{
 
-    private final String filePath = System.getProperty("user.dir") + File.separator + "trips.csv";
+    private final String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "tripcalculator" + File.separator + "bl" + File.separator +  "trips.csv";
     private LinkedList<Trip> trips = new LinkedList<>();
     private String[] headings = {"KM", "Slope", "Type", "Fee", "Vehicle", "Fuel type", "Cargo", "Consumption", "Blue", "Axles"};
 
@@ -23,6 +23,7 @@ public class TripModel extends AbstractTableModel{
         if(!trips.contains(trip))
         {
             trips.add(trip);
+            this.fireTableRowsInserted(0, trips.size() - 1);
         }
     }
 
@@ -123,12 +124,17 @@ public class TripModel extends AbstractTableModel{
                 }
 
                 Trip trip = new Trip(route, vehicle);
+
+                this.addTrip(trip);
             }
             else
             {
-                JOptionPane.showMessageDialog(null,"Loaded Route can't be possible! Not such a Route in routes.csv", "Load Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Loaded Route impossible! Not such a Route in routes.csv", "Load Error", JOptionPane.ERROR_MESSAGE);
             }
         }
+        System.out.println("after load");
         br.close();
     }
+
+
 }

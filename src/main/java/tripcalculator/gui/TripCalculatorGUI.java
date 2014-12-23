@@ -21,17 +21,16 @@ public class TripCalculatorGUI extends JFrame {
     public final static Color COLOR_MEDIUM = new Color(155, 194, 230);
     public final static Color COLOR_LIGHT = new Color(189, 214, 238);
 
-    public TripCalculatorGUI(){
-        init();
+    private TripModel tm = new TripModel();
 
-        TripModel tm = new TripModel();
-        tm.addTrip(new Trip(TripCalculator.getInstance().getRouteById(1), new Car(327, "Diesel", 5)));
-        tm.addTrip(new Trip(TripCalculator.getInstance().getRouteById(1), new Truck(17, "PATROL", 3, true, 0)));
+    public TripCalculatorGUI(){
         try {
-            tm.saveData();
+            tm.loadDate();
+            tbTrip.updateUI();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+        init();
     }
 
     private void init() {
@@ -47,7 +46,7 @@ public class TripCalculatorGUI extends JFrame {
             }
         });
 
-
+        tbTrip.setModel(tm);
 
         menuBar.add(meFile);
         menuBar.add(meAdd);
@@ -55,6 +54,7 @@ public class TripCalculatorGUI extends JFrame {
         meFile.add(miSave);
 
         this.setJMenuBar(menuBar);
+        this.getContentPane().add(new JScrollPane(tbTrip));
     }
 
     private void onAdd() {
