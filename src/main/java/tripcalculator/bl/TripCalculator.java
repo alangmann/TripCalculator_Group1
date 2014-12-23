@@ -28,21 +28,38 @@ public class TripCalculator extends RouteTypes {
         return calculator;
     }
 
+    public Route getRouteById(int id)
+    {
+        Route giveBackRoute = null;
+        for(Route route : routes)
+        {
+            if(route.getRouteID() == id)
+            {
+                giveBackRoute = route;
+                break;
+            }
+        }
+        return giveBackRoute;
+    }
+
     private void loadData() throws Exception {
         fuel = Fuel.getInstance();
         FileReader fr = new FileReader(getClass().getResource("routes.csv").getFile());
         BufferedReader br = new BufferedReader(fr);
 
         String str;
-        while ((str = br.readLine()) != null) {
+        int id = 1;
+        while((str = br.readLine()) != null)
+        {
             str = str.replaceAll(",", ".");
             String[] parts = str.split(";");
             double km = Double.parseDouble(parts[0]);
             double slope = Double.parseDouble(parts[1]);
             String type = parts[2];
             double fee = Double.parseDouble(parts[3]);
-            Route route = new Route(km, slope, type, fee);
-            if (!routes.contains(route)) {
+            Route route = new Route(id++, km,slope,type,fee);
+            if(!routes.contains(route))
+            {
                 routes.add(route);
             }
         }

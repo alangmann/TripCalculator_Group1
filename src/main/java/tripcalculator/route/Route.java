@@ -2,16 +2,22 @@ package tripcalculator.route;
 
 public class Route extends RouteTypes {
 
+    private int routeID;
     private double km;
     private double slope;
     private RouteType type;
     private double fee;
 
-    public Route(double km, double slope, String type, double fee) {
+    public Route(int routeID, double km, double slope, String type, double fee) {
+        this.routeID = routeID;
         this.km = km;
         this.slope = slope;
         this.type = getRouteTypeFormString(type);
         this.fee = fee;
+    }
+
+    public int getRouteID() {
+        return routeID;
     }
 
     public double getKm() {
@@ -32,6 +38,6 @@ public class Route extends RouteTypes {
 
     @Override
     public String toString() {
-        return km + ";" + slope + ";" + type + ";" + fee;
+        return routeID + "";
     }
 }

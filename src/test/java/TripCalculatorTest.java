@@ -19,7 +19,7 @@ public class TripCalculatorTest {
     }
 
     @Test
-    public void loadRoutesWorks() throws Exception {
+    public void loadRoutesWorks() {
         assertTrue(TripCalculator.getInstance().getRoutes().size() > 0);
     }
 
