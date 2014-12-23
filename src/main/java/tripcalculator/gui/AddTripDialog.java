@@ -1,13 +1,26 @@
 package tripcalculator.gui;
 
+import tripcalculator.beans.Trip;
+import tripcalculator.bl.TripCalculator;
 import tripcalculator.fuel.FuelTypes;
+import tripcalculator.route.Route;
+import tripcalculator.vehicle.Car;
+import tripcalculator.vehicle.Truck;
+import tripcalculator.vehicle.Vehicle;
 
 import javax.swing.*;
 import javax.swing.text.NumberFormatter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.NumberFormat;
+import java.util.LinkedList;
 
 public class AddTripDialog extends JDialog {
+
+    private boolean isOk;
+    private Trip newTrip = null;
+
 
     public AddTripDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -19,18 +32,53 @@ public class AddTripDialog extends JDialog {
     }
 
     private void init() {
-        setLayout(new GridLayout(6, 2));
-        setMinimumSize(new Dimension(400, 300));
+        setLayout(new GridLayout(9, 2));
+        setMinimumSize(new Dimension(700, 300));
 
         btgVehicle.add(btCar);
         btgVehicle.add(btTruck);
 
         btCar.setSelected(true);
 
+        onClickBT(null);
+
         cbFuelType.addItem("Diesel");
         cbFuelType.addItem("Patrol");
 
         colorEverything();
+
+        onClickRB(null);
+
+        JPanel panel = new JPanel(new GridLayout(1, 3));
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(rbCR);
+        bg.add(rbHW);
+        bg.add(rbGR);
+        panel.add(rbCR);
+        panel.add(rbHW);
+        panel.add(rbGR);
+
+        btCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        btAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onAdd(e);
+            }
+        });
+
+        btCar.addActionListener(new VehicleAction());
+        btTruck.addActionListener(new VehicleAction());
+
+        rbCR.addActionListener(new RbAction());
+        rbHW.addActionListener(new RbAction());
+        rbGR.addActionListener(new RbAction());
+
+        rbHW.setSelected(true);
 
         add(btCar);
         add(btTruck);
@@ -44,6 +92,44 @@ public class AddTripDialog extends JDialog {
         add(tfAxles);
         add(lbBlue);
         add(cbBlue);
+        add(lbRouteType);
+        add(panel);
+        add(lbRoute);
+        add(cbRoute);
+        add(btCancel);
+        add(btAdd);
+    }
+
+    private void onAdd(ActionEvent e) {
+        try{
+            Double averageConsumption = Double.parseDouble(tfAverageConsumption.getText().replace(",", "."));
+            String fuelType = (String) cbFuelType.getSelectedItem();
+            int cargo = (int) Double.parseDouble(tfCargo.getText().replace(",", "."));
+            Route route = null;
+            for(Route r : TripCalculator.getInstance().getRoutes())
+            {
+                if(r.getCbString().equals((String)cbRoute.getSelectedItem()));
+                {
+                    route = r;
+                }
+            }
+            Vehicle vehicle = null;
+            if(btCar.isSelected())
+            {
+                vehicle = new Car(cargo, fuelType, averageConsumption);
+            }
+            else
+            {
+                int axles = (int)Integer.parseInt(tfAxles.getText().replace(",", "."));
+                boolean adBlue = cbBlue.isSelected();
+                vehicle = new Truck(cargo, fuelType, averageConsumption, adBlue, axles);
+            }
+            newTrip = new Trip(route, vehicle);
+            isOk = true;
+        }catch(NumberFormatException ex)
+        {
+            JOptionPane.showMessageDialog(this, "Average Consumption, Cargo and Axles have to be a NUMBER!", "No Number", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     @Override
@@ -71,22 +157,97 @@ public class AddTripDialog extends JDialog {
         btTruck.setBackground(TripCalculatorGUI.COLOR_DARK);
         btTruck.setForeground(Color.white);
 
-        tfAverageConsumption.setFont(new Font("Arial", Font.PLAIN, 20));
+        tfAverageConsumption.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 20));
         tfAverageConsumption.setHorizontalAlignment(JTextField.CENTER);
 
-        cbFuelType.setFont(new Font("Arial", Font.PLAIN, 20));
+        cbFuelType.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 20));
         ((JLabel)cbFuelType.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
-        tfCargo.setFont(new Font("Arial", Font.PLAIN, 20));
+        tfCargo.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 20));
         tfCargo.setHorizontalAlignment(JTextField.CENTER);
 
-        tfAxles.setFont(new Font("Arial", Font.PLAIN, 20));
+        tfAxles.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 20));
         tfAxles.setHorizontalAlignment(JTextField.CENTER);
 
         cbBlue.setHorizontalAlignment(JCheckBox.CENTER);
         cbBlue.setBackground(TripCalculatorGUI.COLOR_LIGHT);
 
+        cbRoute.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 20));
+        ((JLabel)cbRoute.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+
+        rbCR.setBackground(TripCalculatorGUI.COLOR_MEDIUM);
+        rbCR.setHorizontalAlignment(SwingConstants.CENTER);
+        rbCR.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 20));
+
+        rbHW.setBackground(TripCalculatorGUI.COLOR_MEDIUM);
+        rbHW.setHorizontalAlignment(SwingConstants.CENTER);
+        rbHW.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 20));
+
+        rbGR.setBackground(TripCalculatorGUI.COLOR_MEDIUM);
+        rbGR.setHorizontalAlignment(SwingConstants.CENTER);
+        rbGR.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 20));
     }
+
+    class RbAction implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            onClickRB(e);
+        }
+    }
+
+    class VehicleAction implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            onClickBT(e);
+        }
+    }
+
+    private void onClickBT(ActionEvent e) {
+        if(btCar.isSelected())
+        {
+            cbBlue.setSelected(false);
+            cbBlue.setEnabled(false);
+            tfAxles.setText("");
+            tfAxles.setEnabled(false);
+        }
+        else
+        {
+            cbBlue.setEnabled(true);
+            tfAxles.setEnabled(true);
+        }
+    }
+
+    private void onClickRB(ActionEvent e) {
+        cbRoute.removeAllItems();
+        LinkedList<Route> routes = TripCalculator.getInstance().getRoutes();
+        if(e == null)
+        {
+            for(Route route : routes)
+            {
+                if((route.getType() + "").equalsIgnoreCase("highway")) {
+                    cbRoute.addItem(route.getCbString());
+                }
+            }
+        }
+        else
+        {
+            JRadioButton rb = (JRadioButton) e.getSource();
+            String text = rb.getText();
+            if(!text.equalsIgnoreCase("highway"))
+            {
+                text += "road";
+            }
+            for(Route route : routes)
+            {
+                if((route.getType() + "").equalsIgnoreCase(text)) {
+                    cbRoute.addItem(route.getCbString());
+                }
+            }
+        }
+    }
+
 
     private Container pane = this.getContentPane();
     private ButtonGroup btgVehicle = new ButtonGroup();
@@ -97,10 +258,18 @@ public class AddTripDialog extends JDialog {
     private JTextField tfCargo = new JTextField();
     private JTextField tfAxles = new JTextField();
     private JCheckBox cbBlue = new JCheckBox();
+    private JRadioButton rbCR = new JRadioButton("Country");
+    private JRadioButton rbHW = new JRadioButton("Highway");
+    private JRadioButton rbGR= new JRadioButton("Gravel");
+    private JComboBox<String> cbRoute = new JComboBox<>();
+    private MyButton btCancel = new MyButton("Cancel");
+    private MyButton btAdd = new MyButton("Add");
 
     private MyLabel lbAverageConsumption = new MyLabel("Average Consumption");
     private MyLabel lbFuelType = new MyLabel("Fuel Type");
     private MyLabel lbCargo = new MyLabel("Cargo");
     private MyLabel lbAxles = new MyLabel("Axles");
     private MyLabel lbBlue = new MyLabel("Blue");
+    private MyLabel lbRouteType = new MyLabel("Route Type");
+    private MyLabel lbRoute = new MyLabel("Route");
 }

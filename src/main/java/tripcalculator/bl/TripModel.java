@@ -132,7 +132,6 @@ public class TripModel extends AbstractTableModel{
                 JOptionPane.showMessageDialog(null,"Loaded Route impossible! Not such a Route in routes.csv", "Load Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-        System.out.println("after load");
         br.close();
     }
 

@@ -3,6 +3,7 @@ package tripcalculator.gui;
 import tripcalculator.beans.Trip;
 import tripcalculator.bl.TripCalculator;
 import tripcalculator.bl.TripModel;
+import tripcalculator.bl.TripTableRenderer;
 import tripcalculator.route.Route;
 import tripcalculator.vehicle.Car;
 import tripcalculator.vehicle.Truck;
@@ -47,6 +48,25 @@ public class TripCalculatorGUI extends JFrame {
         });
 
         tbTrip.setModel(tm);
+        tbTrip.setDefaultRenderer(Object.class, new TripTableRenderer());
+
+        menuBar.setBackground(COLOR_DARK);
+
+        meFile.setBackground(COLOR_DARK);
+        meFile.setForeground(Color.white);
+        meFile.setFont(new Font("Agency FB", Font.PLAIN, 25));
+
+        meAdd.setBackground(COLOR_DARK);
+        meAdd.setForeground(Color.white);
+        meAdd.setFont(new Font("Agency FB", Font.PLAIN, 25));
+
+        miOpen.setBackground(COLOR_MEDIUM);
+        miOpen.setForeground(Color.black);
+        miOpen.setFont(new Font("Agency FB", Font.PLAIN, 20));
+
+        miSave.setBackground(COLOR_MEDIUM);
+        miSave.setForeground(Color.black);
+        miSave.setFont(new Font("Agency FB", Font.PLAIN, 20));
 
         menuBar.add(meFile);
         menuBar.add(meAdd);
