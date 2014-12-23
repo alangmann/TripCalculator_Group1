@@ -2,11 +2,14 @@ package tripcalculator.gui;
 
 import tripcalculator.beans.WeekdayFormatException;
 import tripcalculator.bl.TripModel;
+import tripcalculator.bl.TripTableRenderer;
+import tripcalculator.route.Route;
+import tripcalculator.vehicle.Car;
+import tripcalculator.vehicle.Truck;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.IOException;
 
 public class TripCalculatorGUI extends JFrame {
@@ -32,6 +35,18 @@ public class TripCalculatorGUI extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    tm.saveData();
+                } catch (IOException e1) {
+                }
+                finally {
+                    dispose();
+                }
+            }
+        });
 
         meAdd.addMouseListener(new MouseAdapter() {
             @Override
@@ -41,6 +56,25 @@ public class TripCalculatorGUI extends JFrame {
         });
 
         tbTrip.setModel(tm);
+        tbTrip.setDefaultRenderer(Object.class, new TripTableRenderer());
+
+        menuBar.setBackground(COLOR_DARK);
+
+        meFile.setBackground(COLOR_DARK);
+        meFile.setForeground(Color.white);
+        meFile.setFont(new Font("Agency FB", Font.PLAIN, 25));
+
+        meAdd.setBackground(COLOR_DARK);
+        meAdd.setForeground(Color.white);
+        meAdd.setFont(new Font("Agency FB", Font.PLAIN, 25));
+
+        miOpen.setBackground(COLOR_MEDIUM);
+        miOpen.setForeground(Color.black);
+        miOpen.setFont(new Font("Agency FB", Font.PLAIN, 20));
+
+        miSave.setBackground(COLOR_MEDIUM);
+        miSave.setForeground(Color.black);
+        miSave.setFont(new Font("Agency FB", Font.PLAIN, 20));
 
         menuBar.add(meFile);
         menuBar.add(meAdd);
@@ -54,6 +88,10 @@ public class TripCalculatorGUI extends JFrame {
     private void onAdd() {
         AddTripDialog dialog = new AddTripDialog(this, true);
         dialog.setVisible(true);
+        if(dialog.isOk())
+        {
+            tm.addTrip(dialog.getNewTrip());
+        }
     }
 
     public static void main(String[] args) {

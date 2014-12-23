@@ -130,7 +130,11 @@ public class TripModelTest {
     public void testSaveLoadData() throws IOException, WeekdayFormatException {
         testTripModel.saveData();
         testTripModel.addTrip(testTrip3);
-        testTripModel.loadData();
+        try {
+            testTripModel.loadDate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         assertTrue(testTripModel.getRowCount() == 2);
     }
 }

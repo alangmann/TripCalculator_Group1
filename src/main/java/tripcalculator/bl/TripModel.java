@@ -119,14 +119,14 @@ public class TripModel extends AbstractTableModel {
             Route route = TripCalculator.getInstance().getRouteById(routeID);
             if(route != null)
             {
-                Vehicle vehicle;
+                Vehicle vehicle = null;
                 Double averageConsumption = Double.parseDouble(parts[1]);
                 String typeOfFuel = parts[2];
                 int cargo = Integer.parseInt(parts[3]);
 
                 if(parts.length > 4)
                 {
-                    boolean adBlue = parts[4].equalsIgnoreCase("true");
+                    boolean adBlue = parts[4].equalsIgnoreCase("true") ? true : false;
                     int axles = Integer.parseInt(parts[5]);
 
                     vehicle = new Truck(cargo, typeOfFuel, averageConsumption, adBlue, axles);

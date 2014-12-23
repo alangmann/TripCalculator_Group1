@@ -40,4 +40,9 @@ public class Route extends RouteTypes {
     public String toString() {
         return routeID + "";
     }
+
+    public String getCbString()
+    {
+        return ((int)km) + "km " + ((int)slope) + "slope " + ((int)fee) + "€ fee";
+    }
 }
