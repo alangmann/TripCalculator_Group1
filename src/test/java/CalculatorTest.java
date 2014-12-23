@@ -64,4 +64,9 @@ public class CalculatorTest {
     public void idGetsRoute() {
         assertTrue(tripCalculator.getRouteById(1).getRouteID() == 1);
     }
+
+    @Test
+    public void highIdGetsNullRoute() {
+        assertTrue(tripCalculator.getRouteById(99) == null);
+    }
 }

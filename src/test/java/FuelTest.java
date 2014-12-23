@@ -47,6 +47,8 @@ public class FuelTest {
         FileWriter fw = new FileWriter(testFuel.getClass().getResource("sprit_db.csv").getFile());
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write("Monday;1,0;2,0");
+        bw.newLine();
+        bw.write("Tuesday;1,284;1,402\nWednesday;1,299;1,387\nThursday;1,315;1,379\nFriday;1,301;1,367\nSaturday;1,365;1,413\nSunday;1,365;1,413");
         bw.close();
         reassignTestClass();
     }
