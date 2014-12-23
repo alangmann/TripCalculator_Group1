@@ -61,7 +61,7 @@ public class TripModel extends AbstractTableModel {
                 return trip.getRoute().getFee();
             case 10:
                 try {
-                    return String.format("%3.2f €", Calculator.getInstance().calculateTotalCostsOfRoute(trip.getRoute(), trip.getVehicle(), sdf.format(new Date())));
+                    return String.format("%3.2f €", Calculator.getInstance().calculateTotalCostOfRoute(trip.getRoute(), trip.getVehicle(), sdf.format(new Date())));
                 } catch (WeekdayFormatException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
