@@ -17,16 +17,8 @@ public class Trip {
         return vehicle;
     }
 
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
-
     public Route getRoute() {
         return route;
-    }
-
-    public void setRoute(Route route) {
-        this.route = route;
     }
 
     @Override
@@ -37,16 +29,9 @@ public class Trip {
         Trip trip = (Trip) o;
 
         if (!route.equals(trip.route)) return false;
-        if (!vehicle.equals(trip.vehicle)) return false;
+        if (vehicle.equals(trip.vehicle)) return true;
+        else return false;
 
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = vehicle.hashCode();
-        result = 31 * result + route.hashCode();
-        return result;
     }
 
     @Override

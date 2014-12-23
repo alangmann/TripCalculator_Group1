@@ -15,11 +15,6 @@ public class Car extends Vehicle{
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
     public String whoAmI()
     {
         return "Car";

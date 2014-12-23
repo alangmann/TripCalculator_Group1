@@ -9,7 +9,7 @@ public class FuelTest {
     private Fuel testFuel;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         testFuel = Fuel.getInstance();
     }
 
