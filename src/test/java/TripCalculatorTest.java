@@ -2,6 +2,8 @@ import org.junit.Before;
 import org.junit.Test;
 import tripcalculator.bl.TripCalculator;
 import tripcalculator.route.Route;
+import tripcalculator.vehicle.Car;
+import tripcalculator.vehicle.Vehicle;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -43,8 +45,13 @@ public class TripCalculatorTest {
     }
 
     @Test
-    public void GravelroadIsDoubleHighway() throws Exception {
+    public void GravelroadIsDoubleHighway() {
         assertTrue(tripCalculator.calculateCo2Consumption(new Route(1, -50, "Highway", 1)) * 2 == tripCalculator.calculateCo2Consumption(new Route(1, -50, "Gravelroad", 1)));
+    }
+
+    @Test
+    public void exampleCalculationReturns1comma458() {
+        assertTrue(String.format(Locale.US, "%.3f", (tripCalculator.calculateCo2Consumption(new Route(10, 0, "test", 0), new Car(100, "test", 5)))).equals("1.458"));
     }
 
 }
