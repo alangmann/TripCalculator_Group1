@@ -58,26 +58,18 @@ public class TripCalculator extends RouteTypes {
         if (slopePercent <= -5) {
             return 0;
         }
-
-        double consumption = (vehicle.getCargo() / 100);
-        if (vehicle instanceof Car) {
-            consumption *= 0.5;
-        } else if (vehicle instanceof Truck) {
-            consumption *= 0.05;
+        if (vehicle != null) {
+            double consumption = (vehicle.getCargo() / 100);
+            if (vehicle instanceof Car) {
+                consumption *= 0.5;
+            } else if (vehicle instanceof Truck) {
+                consumption *= 0.05;
+            }
+            consumption += vehicle.getAverageConsumption();
+            return km * (0.1325 * consumption / 5) * (slope / (km * 1000) + 1) * factorMap.get(type);
+        } else {
+            return km * 0.1325 * (slope / (km * 1000) + 1) * factorMap.get(type);
         }
-        consumption += vehicle.getAverageConsumption();
-        return km * (0.1325 * consumption / 5) * (slope / (km * 1000) + 1) * factorMap.get(type);
-    }
-
-    public double calculateCo2Consumption(Route route) {
-        double slope = route.getSlope();
-        double km = route.getKm();
-        RouteType type = route.getType();
-        double slopePercent = (slope * 1000) / km;
-        if (slopePercent <= -5) {
-            return 0;
-        }
-        return km * 0.1325 * (slope / (km * 1000) + 1) * factorMap.get(type);
     }
 
     public LinkedList<Route> getRoutes() {
