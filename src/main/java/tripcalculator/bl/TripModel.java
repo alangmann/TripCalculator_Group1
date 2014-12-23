@@ -11,18 +11,25 @@ import javax.swing.table.AbstractTableModel;
 import java.io.*;
 import java.util.LinkedList;
 
-public class TripModel extends AbstractTableModel{
+public class TripModel extends AbstractTableModel {
 
     private LinkedList<Trip> trips = new LinkedList<>();
     private String[] headings = {"KM", "Slope", "Type", "Fee", "Vehicle", "Fuel type", "Cargo", "Consumption", "Blue", "Axles"};
 
-    public void addTrip(Trip trip)
-    {
-        if(!trips.contains(trip))
-        {
+    public void addTrip(Trip trip) {
+        if (!trips.contains(trip)) {
             trips.add(trip);
         }
     }
+
+    public LinkedList<Trip> getTrips() {
+        return trips;
+    }
+
+    public String[] getHeadings() {
+        return headings;
+    }
+
 
     @Override
     public int getRowCount() {
@@ -37,38 +44,45 @@ public class TripModel extends AbstractTableModel{
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Trip trip = trips.get(rowIndex);
-        switch(columnIndex)
-        {
-            case 0: return trip.getRoute().getKm();
-            case 1: return trip.getRoute().getSlope();
-            case 2: return trip.getRoute().getType();
-            case 3: return trip.getRoute().getFee();
+        switch (columnIndex) {
+            case 0:
+                return trip.getRoute().getKm();
+            case 1:
+                return trip.getRoute().getSlope();
+            case 2:
+                return trip.getRoute().getType();
+            case 3:
+                return trip.getRoute().getFee();
             default:
                 Vehicle vehicle = trip.getVehicle();
-                switch(columnIndex)
-                {
-                    case 4: return vehicle.whoAmI();
-                    case 5: return vehicle.getTypeOfFuel();
-                    case 6: return vehicle.getAverageConsumption();
-                    case 7: return vehicle.getCargo();
+                switch (columnIndex) {
+                    case 4:
+                        return vehicle.whoAmI();
+                    case 5:
+                        return vehicle.getTypeOfFuel();
+                    case 6:
+                        return vehicle.getAverageConsumption();
+                    case 7:
+                        return vehicle.getCargo();
                     default:
-                        if(vehicle instanceof Truck)
-                        {
+                        if (vehicle instanceof Truck) {
                             Truck truck = (Truck) vehicle;
-                            switch (columnIndex)
-                            {
-                                case 8: return truck.isAdBlue() ? "Yes" : "No";
-                                case 9: return truck.getAxles();
-                                default: return "error";
+                            switch (columnIndex) {
+                                case 8:
+                                    return truck.isAdBlue() ? "Yes" : "No";
+                                case 9:
+                                    return truck.getAxles();
+                                default:
+                                    return "error";
                             }
-                        }
-                        else
-                        {
-                            switch (columnIndex)
-                            {
-                                case 8: return " - ";
-                                case 9: return " - ";
-                                default: return "error";
+                        } else {
+                            switch (columnIndex) {
+                                case 8:
+                                    return " - ";
+                                case 9:
+                                    return " - ";
+                                default:
+                                    return "error";
                             }
                         }
                 }
@@ -83,30 +97,27 @@ public class TripModel extends AbstractTableModel{
     public void saveData() throws IOException {
         FileWriter fw = new FileWriter(getClass().getResource("trips.csv").getFile());
         BufferedWriter bw = new BufferedWriter(fw);
-        for(Trip trip : trips)
-        {
+        for (Trip trip : trips) {
             bw.write(trip.toString());
         }
         bw.flush();
         bw.close();
     }
 
-    public void loadDate() throws IOException {
+    public void loadData() throws IOException {
         FileReader fr = new FileReader(getClass().getResource("trips.csv").getFile());
         BufferedReader br = new BufferedReader(fr);
-        String line = "";
-        while((line = br.readLine()) != null)
-        {
+        String line;
+        while ((line = br.readLine()) != null) {
             String[] parts = line.split(";");
-
         }
         br.close();
     }
 
     public static void main(String[] args) {
         TripModel tm = new TripModel();
-        tm.addTrip(new Trip(new Route(5,5,"highway",0), new Car(327, "Diesel", 5)));
-        tm.addTrip(new Trip(new Route(17,3,"GRAVELROAD",0), new Car(17, "PATROL", 3)));
+        tm.addTrip(new Trip(new Route(5, 5, "highway", 0), new Car(327, "Diesel", 5)));
+        tm.addTrip(new Trip(new Route(17, 3, "GRAVELROAD", 0), new Car(17, "PATROL", 3)));
         try {
             tm.saveData();
         } catch (IOException e) {
