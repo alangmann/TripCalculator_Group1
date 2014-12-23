@@ -22,7 +22,7 @@ public class TripCalculator extends RouteTypes {
         try {
             loadData();
         } catch (IOException e) {
-            System.out.println("Failed in tripcalculator.bl.TripCalculator - " + e.getMessage());
+            System.out.println("Failed in TripCalculator - " + e.getMessage());
         }
     }
 

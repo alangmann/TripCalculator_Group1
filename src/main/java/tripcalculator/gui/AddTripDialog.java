@@ -1,6 +1,5 @@
 package tripcalculator.gui;
 
-import com.jgoodies.looks.windows.WindowsLookAndFeel;
 import tripcalculator.fuel.FuelTypes;
 
 import javax.swing.*;

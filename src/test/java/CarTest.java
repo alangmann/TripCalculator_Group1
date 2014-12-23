@@ -7,11 +7,12 @@ import static org.junit.Assert.assertTrue;
 
 public class CarTest extends FuelTypes {
 
-    private Car testCar;
+    private Car testCar, testCar2;
 
     @Before
     public void setup() {
-        testCar = new Car(1,"patrol",5);
+        testCar = new Car(1, "patrol", 5);
+        testCar2 = new Car(1, "patrol", 5);
     }
 
     @Test
@@ -25,8 +26,12 @@ public class CarTest extends FuelTypes {
     }
 
     @Test
-    public void averageConsumtionReturnsAverageConsumtion() {
+    public void averageConsumptionReturnsAverageConsumption() {
         assertTrue(testCar.getAverageConsumption() == 5);
     }
 
+    @Test
+    public void carEqualsCar() {
+        assertTrue(testCar.equals(testCar2));
+    }
 }

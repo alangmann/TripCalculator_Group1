@@ -1,6 +1,5 @@
 package tripcalculator.gui;
 
-import com.jgoodies.looks.windows.WindowsLookAndFeel;
 import tripcalculator.beans.Trip;
 import tripcalculator.bl.TripModel;
 import tripcalculator.route.Route;
