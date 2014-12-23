@@ -16,7 +16,7 @@ public class TripModel extends AbstractTableModel{
     private LinkedList<Trip> trips = new LinkedList<>();
     private String[] headings = {"KM", "Slope", "Type", "Fee", "Vehicle", "Fuel type", "Cargo", "Consumption", "Blue", "Axles"};
 
-    private void addTrip(Trip trip)
+    public void addTrip(Trip trip)
     {
         if(!trips.contains(trip))
         {

@@ -1,6 +1,10 @@
 package tripcalculator.gui;
 
 import com.jgoodies.looks.windows.WindowsLookAndFeel;
+import tripcalculator.beans.Trip;
+import tripcalculator.bl.TripModel;
+import tripcalculator.route.Route;
+import tripcalculator.vehicle.Car;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 /**
  * Created by Lukas on 22.12.2014.
@@ -20,6 +25,15 @@ public class TripCalculatorGUI extends JFrame {
 
     public TripCalculatorGUI(){
         init();
+
+        TripModel tm = new TripModel();
+        tm.addTrip(new Trip(new Route(5,5,"highway",0), new Car(327, "Diesel", 5)));
+        tm.addTrip(new Trip(new Route(17,3,"GRAVELROAD",0), new Car(17, "PATROL", 3)));
+        try {
+            tm.saveData();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 
     private void init() {
