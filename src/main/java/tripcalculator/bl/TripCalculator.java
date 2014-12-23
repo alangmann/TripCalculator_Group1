@@ -14,19 +14,18 @@ import java.util.LinkedList;
 
 public class TripCalculator extends RouteTypes {
 
-    private static TripCalculator calculator = new TripCalculator();
+    private static TripCalculator calculator;
     private Fuel fuel;
     private LinkedList<Route> routes = new LinkedList<>();
 
-    private TripCalculator() {
-        try {
-            loadData();
-        } catch (IOException e) {
-            System.out.println("Failed in TripCalculator - " + e.getMessage());
-        }
+    private TripCalculator() throws IOException {
+        loadData();
     }
 
-    public static TripCalculator getInstance() {
+    public static TripCalculator getInstance() throws IOException {
+        if (calculator == null) {
+            calculator = new TripCalculator();
+        }
         return calculator;
     }
 
@@ -36,55 +35,46 @@ public class TripCalculator extends RouteTypes {
         BufferedReader br = new BufferedReader(fr);
 
         String str;
-        while((str = br.readLine()) != null)
-        {
+        while ((str = br.readLine()) != null) {
             str = str.replaceAll(",", ".");
             String[] parts = str.split(";");
             double km = Double.parseDouble(parts[0]);
             double slope = Double.parseDouble(parts[1]);
             String type = parts[2];
             double fee = Double.parseDouble(parts[3]);
-            Route route = new Route(km,slope,type,fee);
-            if(!routes.contains(route))
-            {
+            Route route = new Route(km, slope, type, fee);
+            if (!routes.contains(route)) {
                 routes.add(route);
             }
         }
         br.close();
     }
 
-    public double calculateCo2Consumption(Route route, Vehicle vehicle)
-    {
+    public double calculateCo2Consumption(Route route, Vehicle vehicle) {
         double slope = route.getSlope();
         double km = route.getKm();
         RouteType type = route.getType();
         double slopePercent = (slope * 1000) / km;
-        if(slopePercent <= -5)
-        {
+        if (slopePercent <= -5) {
             return 0;
         }
 
-        double consumption =(vehicle.getCargo() / 100);
-        if(vehicle instanceof Car)
-        {
+        double consumption = (vehicle.getCargo() / 100);
+        if (vehicle instanceof Car) {
             consumption *= 0.5;
-        }
-        else if(vehicle instanceof Truck)
-        {
-                consumption *= 0.05;
+        } else if (vehicle instanceof Truck) {
+            consumption *= 0.05;
         }
         consumption += vehicle.getAverageConsumption();
         return km * (0.1325 * consumption / 5) * (slope / (km * 1000) + 1) * factorMap.get(type);
     }
 
-    public double calculateCo2Consumption(Route route)
-    {
+    public double calculateCo2Consumption(Route route) {
         double slope = route.getSlope();
         double km = route.getKm();
         RouteType type = route.getType();
         double slopePercent = (slope * 1000) / km;
-        if(slopePercent <= -5)
-        {
+        if (slopePercent <= -5) {
             return 0;
         }
         return km * 0.1325 * (slope / (km * 1000) + 1) * factorMap.get(type);
