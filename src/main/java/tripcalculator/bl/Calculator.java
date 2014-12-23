@@ -102,6 +102,6 @@ public class Calculator extends RouteTypes {
             return 0;
         }
         double consumption = getAvgConsumtion(vehicle);
-        return (km * consumption / 100) * fuel.getPrice(fuel.stringToDay(dayOfWeek), vehicle.getTypeOfFuel()) * (slope / (km * 1000) + 1) + (vehicle instanceof Truck ? ((Truck)vehicle).getAxles() * 1.5 * route.getFee() : 0);
+        return (km * consumption / 100) * fuel.getPrice(fuel.stringToDay(dayOfWeek), vehicle.getTypeOfFuel()) * (slope / (km * 1000) + 1) + (vehicle instanceof Truck ? ((Truck)vehicle).getAxles() * 1.5 * route.getFee() : route.getFee());
     }
 }
