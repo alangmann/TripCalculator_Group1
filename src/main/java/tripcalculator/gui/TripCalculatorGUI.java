@@ -18,7 +18,7 @@ public class TripCalculatorGUI extends JFrame {
 
     public TripCalculatorGUI(){
         try {
-            tm.loadData();
+            tm.loadData(null);
             tbTrip.updateUI();
         } catch (IOException | WeekdayFormatException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
