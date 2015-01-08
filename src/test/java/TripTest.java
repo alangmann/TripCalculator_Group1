@@ -4,17 +4,19 @@ import tripcalculator.beans.Trip;
 import tripcalculator.route.Route;
 import tripcalculator.vehicle.Car;
 
+import java.util.LinkedList;
+
 import static org.junit.Assert.*;
 
 public class TripTest {
 
     private Trip testTrip;
-    private Route testRoute;
+    private LinkedList<Route> testRoute;
     private Car testCar;
 
     @Before
     public void setUp() throws Exception {
-        testRoute = new Route(1, 10, 5, "Highway", 5);
+        testRoute.add(new Route(1, 10, 5, "Highway", 5));
         testCar = new Car(100, "diesel", 5);
         testTrip = new Trip(testRoute, testCar);
     }
@@ -26,7 +28,7 @@ public class TripTest {
 
     @Test
     public void testGetRoute() {
-        assertTrue(testTrip.getRoute().equals(testRoute));
+        assertTrue(testTrip.getRoutes().equals(testRoute));
     }
 
     @Test

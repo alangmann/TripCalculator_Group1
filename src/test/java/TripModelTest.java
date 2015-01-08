@@ -9,6 +9,7 @@ import tripcalculator.vehicle.Truck;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import static org.junit.Assert.*;
 
@@ -18,7 +19,7 @@ public class TripModelTest {
     private Trip testTrip1;
     private Trip testTrip2;
     private Trip testTrip3;
-    private Route testRoute;
+    private LinkedList<Route> testRoute;
     private Car testCar;
     private Car testCar2;
     private Truck testTruck;
@@ -26,7 +27,7 @@ public class TripModelTest {
     @Before
     public void setUp() {
         testTripModel = new TripModel();
-        testRoute = new Route(1, 10, 5, "Highway", 5);
+        testRoute.add(new Route(1, 10, 5, "Highway", 5));
         testCar = new Car(100, "diesel", 5);
         testCar2 = new Car(200, "diesel", 6);
         testTruck = new Truck(1000, "diesel", 5, true, 3);

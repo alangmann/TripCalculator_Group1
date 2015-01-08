@@ -245,6 +245,7 @@ public class AddTripDialog extends JDialog {
     private void onClickRB(ActionEvent e) throws Exception {
         cbRoute.removeAllItems();
         LinkedList<Route> routes = Calculator.getInstance().getRoutes();
+        cbRoute.addItem("All");
         if(e == null)
         {
             for(Route route : routes)

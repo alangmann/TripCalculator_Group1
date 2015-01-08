@@ -15,11 +15,57 @@ public class Trip {
         this.vehicle = vehicle;
     }
 
+    public double getAllKM()
+    {
+        double km = 0;
+        for(Route route : routes)
+        {
+            km += route.getKm();
+        }
+        return km;
+    }
+
+    public double getAllSlope()
+    {
+        double slope = 0;
+        for(Route route : routes)
+        {
+            slope += route.getSlope();
+        }
+        return slope;
+    }
+
+    public String getTypeString()
+    {
+        String type = "";
+        for(Route route : routes)
+        {
+            if(!type.contains((route.getType() + "").toLowerCase().substring(0,1)))
+            {
+                if(type.length() == 0)
+                    type += (route.getType() + "").toLowerCase().substring(0,1);
+                else
+                    type += ", " + (route.getType() + "").toLowerCase().substring(0,1);
+            }
+        }
+        return type;
+    }
+
+    public double getAllFee()
+    {
+        double fee = 0;
+        for(Route route : routes)
+        {
+            fee += route.getFee();
+        }
+        return fee;
+    }
+
     public Vehicle getVehicle() {
         return vehicle;
     }
 
-    public LinkedList<Route> getRoute() {
+    public LinkedList<Route> getRoutes() {
         return routes;
     }
 
@@ -38,6 +84,14 @@ public class Trip {
 
     @Override
     public String toString() {
-        return routes.get(0) + ";" + vehicle;
+        String routeIDs = "";
+        for(Route route : routes)
+        {
+            if(routeIDs.length() == 0)
+                routeIDs += route.getRouteID();
+            else
+                routeIDs +=  "#" + route.getRouteID();
+        }
+        return routeIDs + ";" + vehicle;
     }
 }

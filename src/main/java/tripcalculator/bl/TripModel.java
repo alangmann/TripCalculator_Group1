@@ -51,16 +51,16 @@ public class TripModel extends AbstractTableModel {
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
         switch (columnIndex) {
             case 0:
-                return trip.getRoute().getKm();
+                return trip.getAllKM();
             case 1:
-                return trip.getRoute().getSlope();
+                return trip.getAllSlope();
             case 2:
-                return trip.getRoute().getType();
+                return trip.getTypeString();
             case 3:
-                return trip.getRoute().getFee();
+                return trip.getAllFee();
             case 10:
                 try {
-                    return String.format("%3.2f €", Calculator.getInstance().calculateTotalCostOfRoute(trip.getRoute(), trip.getVehicle(), sdf.format(new Date())));
+                    return String.format("%3.2f €", Calculator.getInstance().calculateAllCost(trip.getRoutes(), trip.getVehicle(), sdf.format(new Date())));
                 } catch (WeekdayFormatException | IOException e) {
                     e.printStackTrace();
                 }
@@ -141,10 +141,11 @@ public class TripModel extends AbstractTableModel {
         String line;
         while ((line = br.readLine()) != null) {
             String[] parts = line.split(";");
-            int routeID = Integer.parseInt(parts[0]);
-            Route route = Calculator.getInstance().getRouteById(routeID);
-            if(route != null)
-            {
+            String[] routeIDs = parts[0].split("#");
+            LinkedList<Route> routes = new LinkedList<>();
+            for (int i = 0; i < routeIDs.length; i++) {
+                routes.add(Calculator.getInstance().getRouteById(Integer.parseInt(routeIDs[i])));
+            }
                 Vehicle vehicle;
                 Double averageConsumption = Double.parseDouble(parts[1]);
                 String typeOfFuel = parts[2];
@@ -162,10 +163,9 @@ public class TripModel extends AbstractTableModel {
                     vehicle = new Car(cargo, typeOfFuel, averageConsumption);
                 }
 
-                Trip trip = new Trip(route, vehicle);
+                Trip trip = new Trip(routes, vehicle);
 
                 this.addTrip(trip);
-            }
         }
         br.close();
     }
