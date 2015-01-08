@@ -106,15 +106,15 @@ public class Calculator extends RouteTypes {
     }
     
     public double calculateAllCost(LinkedList<Route> routes, Vehicle vehicle, String dayOfWeek) throws WeekdayFormatException {
-        int sum = 0;
+        double sum = 0;
         for ( Route route : routes ) {
             sum += calculateTotalCostOfRoute(route, vehicle, dayOfWeek);
         }
         return sum;
     }
 
-    public double calculateAllCo2(LinkedList<Route> routes, Vehicle vehicle) throws WeekdayFormatException {
-        int sum = 0;
+    public double calculateAllCo2(LinkedList<Route> routes, Vehicle vehicle) {
+        double sum = 0;
         for ( Route route : routes ) {
             sum += calculateCo2Consumption(route, vehicle);
         }

@@ -7,6 +7,7 @@ import tripcalculator.vehicle.Car;
 import tripcalculator.vehicle.Truck;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Locale;
 
 import static org.junit.Assert.assertTrue;
@@ -61,6 +62,13 @@ public class CalculatorTest {
     }
 
     @Test
+    public void exampleTruckCalculationWithListReturns1comma458() {
+        LinkedList<Route> routes = new LinkedList<>();
+        routes.add(new Route(1, 10, 0, "test", 0));
+        assertTrue(String.format(Locale.US, "%.3f", (tripCalculator.calculateAllCo2(routes, new Truck(1000, "test", 5, false, 3)))).equals("1.458"));
+    }
+
+    @Test
     public void idGetsRoute() {
         assertTrue(tripCalculator.getRouteById(1).getRouteID() == 1);
     }
@@ -73,6 +81,13 @@ public class CalculatorTest {
     @Test
     public void exampleCostCalculationReturns34comma73() throws WeekdayFormatException {
         assertTrue(String.format(Locale.US, "%.2f", (tripCalculator.calculateTotalCostOfRoute(new Route(1, 10, 500, "test", 5), new Truck(20000, "diesel", 35, true, 4), "monday"))).equals("34.73"));
+    }
+
+    @Test
+    public void exampleCostCalculationWithListReturns34comma73() throws WeekdayFormatException {
+        LinkedList<Route> routes = new LinkedList<>();
+        routes.add(new Route(1, 10, 500, "test", 5));
+        assertTrue(String.format(Locale.US, "%.2f", (tripCalculator.calculateAllCost(routes, new Truck(20000, "diesel", 35, true, 4), "monday"))).equals("34.73"));
     }
 
     @Test
