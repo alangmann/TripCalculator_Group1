@@ -52,10 +52,6 @@ public class AddTripDialog extends JDialog {
         onClickRB(null);
 
         JPanel panel = new JPanel(new GridLayout(1, 3));
-        ButtonGroup bg = new ButtonGroup();
-        bg.add(rbCR);
-        bg.add(rbHW);
-        bg.add(rbGR);
         panel.add(rbCR);
         panel.add(rbHW);
         panel.add(rbGR);
@@ -98,12 +94,28 @@ public class AddTripDialog extends JDialog {
             Double averageConsumption = Double.parseDouble(tfAverageConsumption.getText().replace(",", "."));
             String fuelType = (String) cbFuelType.getSelectedItem();
             int cargo = (int) Double.parseDouble(tfCargo.getText().replace(",", "."));
-            Route route = null;
-            for(Route r : Calculator.getInstance().getRoutes())
+            LinkedList<Route> routes = new LinkedList<>();
+            if(cbRoute.getSelectedIndex() == 0)
             {
-                if(r.getCbString().equals(cbRoute.getSelectedItem()))
+                for(Route r : Calculator.getInstance().getRoutes())
                 {
-                    route = r;
+                    for(int i = 1; i < cbRoute.getItemCount(); i++)
+                    {
+                        if(r.getCbString().equals(cbRoute.getItemAt(i)))
+                        {
+                            routes.add(r);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for(Route r : Calculator.getInstance().getRoutes())
+                {
+                    if(r.getCbString().equals(cbRoute.getSelectedItem()))
+                    {
+                        routes.add(r);
+                    }
                 }
             }
             Vehicle vehicle;
@@ -117,7 +129,7 @@ public class AddTripDialog extends JDialog {
                 boolean adBlue = cbBlue.isSelected();
                 vehicle = new Truck(cargo, fuelType, averageConsumption, adBlue, axles);
             }
-            newTrip = new Trip(route, vehicle);
+            newTrip = new Trip(routes, vehicle);
             isOk = true;
             dispose();
         }catch(NumberFormatException ex)
@@ -244,15 +256,23 @@ public class AddTripDialog extends JDialog {
         }
         else
         {
-            JRadioButton rb = (JRadioButton) e.getSource();
-            String text = rb.getText();
-            if(!text.equalsIgnoreCase("highway"))
+            LinkedList<String> selectedRouteTypes = new LinkedList<>();
+
+            if(rbGR.isSelected())
             {
-                text += "road";
+                selectedRouteTypes.add(rbGR.getText().toLowerCase() + "road");
+            }
+            if(rbCR.isSelected())
+            {
+                selectedRouteTypes.add(rbCR.getText().toLowerCase() + "road");
+            }
+            if(rbHW.isSelected())
+            {
+                selectedRouteTypes.add(rbHW.getText().toLowerCase());
             }
             for(Route route : routes)
             {
-                if((route.getType() + "").equalsIgnoreCase(text)) {
+                if(selectedRouteTypes.contains((route.getType() + "").toLowerCase())) {
                     cbRoute.addItem(route.getCbString());
                 }
             }
