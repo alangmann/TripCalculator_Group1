@@ -72,7 +72,7 @@ public class Calculator extends RouteTypes {
             return 0;
         }
         if (vehicle != null) {
-            double consumption = getAvgConsumtion(vehicle);
+            double consumption = getAvgConsumption(vehicle);
             return km * (0.1325 * consumption / 5) * (slope / (km * 1000) + 1) * factorMap.get(type);
         } else {
             return km * 0.1325 * (slope / (km * 1000) + 1) * factorMap.get(type);
@@ -83,7 +83,7 @@ public class Calculator extends RouteTypes {
         return routes;
     }
 
-    private double getAvgConsumtion(Vehicle vehicle) {
+    private double getAvgConsumption(Vehicle vehicle) {
         double consumption = (vehicle.getCargo() / 100);
         if (vehicle instanceof Car) {
             consumption *= 0.5;
@@ -101,7 +101,23 @@ public class Calculator extends RouteTypes {
         if (slopePercent <= -5) {
             return 0;
         }
-        double consumption = getAvgConsumtion(vehicle);
+        double consumption = getAvgConsumption(vehicle);
         return (km * consumption / 100) * fuel.getPrice(fuel.stringToDay(dayOfWeek), vehicle.getTypeOfFuel()) * (slope / (km * 1000) + 1) + (vehicle instanceof Truck ? ((Truck)vehicle).getAxles() * 1.5 * route.getFee() : route.getFee());
+    }
+    
+    public double calculateAllCost(Vehicle vehicle, String dayOfWeek) throws WeekdayFormatException {
+        int sum = 0;
+        for ( Route route : routes ) {
+            sum += calculateTotalCostOfRoute(route, vehicle, dayOfWeek);
+        }
+        return sum;
+    }
+
+    public double calculateAllCo2(Vehicle vehicle) throws WeekdayFormatException {
+        int sum = 0;
+        for ( Route route : routes ) {
+            sum += calculateCo2Consumption(route, vehicle);
+        }
+        return sum;
     }
 }
