@@ -105,7 +105,7 @@ public class Calculator extends RouteTypes {
         return (km * consumption / 100) * fuel.getPrice(fuel.stringToDay(dayOfWeek), vehicle.getTypeOfFuel()) * (slope / (km * 1000) + 1) + (vehicle instanceof Truck ? ((Truck)vehicle).getAxles() * 1.5 * route.getFee() : route.getFee());
     }
     
-    public double calculateAllCost(Vehicle vehicle, String dayOfWeek) throws WeekdayFormatException {
+    public double calculateAllCost(LinkedList<Route> routes, Vehicle vehicle, String dayOfWeek) throws WeekdayFormatException {
         int sum = 0;
         for ( Route route : routes ) {
             sum += calculateTotalCostOfRoute(route, vehicle, dayOfWeek);
@@ -113,7 +113,7 @@ public class Calculator extends RouteTypes {
         return sum;
     }
 
-    public double calculateAllCo2(Vehicle vehicle) throws WeekdayFormatException {
+    public double calculateAllCo2(LinkedList<Route> routes, Vehicle vehicle) throws WeekdayFormatException {
         int sum = 0;
         for ( Route route : routes ) {
             sum += calculateCo2Consumption(route, vehicle);
