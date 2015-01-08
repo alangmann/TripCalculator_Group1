@@ -3,13 +3,15 @@ package tripcalculator.beans;
 import tripcalculator.route.Route;
 import tripcalculator.vehicle.Vehicle;
 
+import java.util.LinkedList;
+
 public class Trip {
 
     private Vehicle vehicle;
-    private Route route;
+    private LinkedList<Route> routes = new LinkedList<>();
 
-    public Trip(Route route, Vehicle vehicle) {
-        this.route = route;
+    public Trip(LinkedList<Route> routes, Vehicle vehicle) {
+        this.routes = routes;
         this.vehicle = vehicle;
     }
 
@@ -17,8 +19,8 @@ public class Trip {
         return vehicle;
     }
 
-    public Route getRoute() {
-        return route;
+    public LinkedList<Route> getRoute() {
+        return routes;
     }
 
     @Override
@@ -28,14 +30,14 @@ public class Trip {
 
         Trip trip = (Trip) o;
 
-        if (!route.equals(trip.route)) return false;
-        if (vehicle.equals(trip.vehicle)) return true;
-        else return false;
+        if (routes != null ? !routes.equals(trip.routes) : trip.routes != null) return false;
+        if (vehicle != null ? !vehicle.equals(trip.vehicle) : trip.vehicle != null) return false;
 
+        return true;
     }
 
     @Override
     public String toString() {
-        return route + ";" + vehicle;
+        return routes.get(0) + ";" + vehicle;
     }
 }
