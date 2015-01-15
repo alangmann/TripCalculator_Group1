@@ -14,6 +14,9 @@ public class TripCalculatorGUI extends JFrame {
     public final static Color COLOR_MEDIUM = new Color(155, 194, 230);
     public final static Color COLOR_LIGHT = new Color(189, 214, 238);
 
+    /*
+     *  TODO: change to spring
+     */
     private TripModel tm = new TripModel();
 
     public TripCalculatorGUI(){

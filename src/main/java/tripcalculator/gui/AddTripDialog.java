@@ -16,7 +16,7 @@ import java.util.LinkedList;
 public class AddTripDialog extends JDialog {
 
     private boolean isOk;
-    private Trip newTrip = null;
+    private Trip newTrip;
 
 
     public AddTripDialog(java.awt.Frame parent, boolean modal) {
