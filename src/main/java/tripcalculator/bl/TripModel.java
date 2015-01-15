@@ -17,7 +17,7 @@ public class TripModel extends AbstractTableModel {
 
     private final String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "tripcalculator" + File.separator + "bl" + File.separator +  "trips.csv";
     private LinkedList<Trip> trips = new LinkedList<>();
-    private String[] headings = {"KM", "Slope", "Type", "Fee", "Vehicle", "Fuel type", "Cargo", "Consumption", "Blue", "Axles", "Total Costs"};
+    private String[] headings = {"KM", "Slope", "Type", "Fee", "Vehicle", "Fuel type", "Consumption", "Cargo", "Blue", "Axles", "Total Costs"};
 
     public void addTrip(Trip trip) {
         if (!trips.contains(trip)) {
