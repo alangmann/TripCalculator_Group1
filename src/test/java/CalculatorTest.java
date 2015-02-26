@@ -1,29 +1,31 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import tripcalculator.beans.WeekdayFormatException;
 import tripcalculator.bl.Calculator;
 import tripcalculator.route.Route;
 import tripcalculator.vehicle.Car;
 import tripcalculator.vehicle.Truck;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Locale;
 
 import static org.junit.Assert.assertTrue;
 
+@ContextConfiguration(locations = "classpath:spring/spring-di-sample-annotation-context.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
 public class CalculatorTest {
 
+    @Resource(name = "Calculator")
     private Calculator tripCalculator;
-
-    @Before
-    public void setup() throws Exception {
-        tripCalculator = Calculator.getInstance();
-    }
 
     @Test
     public void loadRoutesWorks() throws IOException, WeekdayFormatException {
-        assertTrue(Calculator.getInstance().getRoutes().size() > 0);
+        assertTrue(tripCalculator.getRoutes().size() > 0);
     }
 
     @Test

@@ -1,5 +1,9 @@
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import tripcalculator.beans.Trip;
 import tripcalculator.beans.WeekdayFormatException;
 import tripcalculator.bl.TripModel;
@@ -7,26 +11,30 @@ import tripcalculator.route.Route;
 import tripcalculator.vehicle.Car;
 import tripcalculator.vehicle.Truck;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 
 import static org.junit.Assert.*;
 
+@ContextConfiguration(locations = "classpath:spring/spring-di-sample-annotation-context.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
 public class TripModelTest {
 
+    @Resource(name = "TripModel")
     private TripModel testTripModel;
+
     private Trip testTrip1;
     private Trip testTrip2;
     private Trip testTrip3;
-    private LinkedList<Route> testRoute;
+    private LinkedList<Route> testRoute = new LinkedList<>();
     private Car testCar;
     private Car testCar2;
     private Truck testTruck;
 
     @Before
     public void setUp() {
-        testTripModel = new TripModel();
         testRoute.add(new Route(1, 10, 5, "Highway", 5));
         testCar = new Car(100, "diesel", 5);
         testCar2 = new Car(200, "diesel", 6);
@@ -45,7 +53,7 @@ public class TripModelTest {
 
     @Test
     public void testGetRowCount() {
-        assertTrue(testTripModel.getRowCount() == 2);
+        assertTrue(testTripModel.getRowCount() == 20);
     }
 
     @Test
@@ -65,7 +73,7 @@ public class TripModelTest {
 
     @Test
     public void testGetValueAtType() {
-        assertTrue(testTripModel.getValueAt(0, 2).toString().equals("HIGHWAY"));
+        assertTrue(testTripModel.getValueAt(0, 2).toString().equals("h"));
     }
 
     @Test

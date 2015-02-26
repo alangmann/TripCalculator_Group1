@@ -1,5 +1,6 @@
 package tripcalculator.bl;
 
+import org.springframework.stereotype.Service;
 import tripcalculator.gui.TripCalculatorGUI;
 
 import javax.swing.*;
@@ -7,6 +8,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
+@Service("TripTableRenderer")
 public class TripTableRenderer implements TableCellRenderer {
 
     @Override

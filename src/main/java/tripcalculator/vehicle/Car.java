@@ -1,5 +1,7 @@
 package tripcalculator.vehicle;
 
+import org.springframework.stereotype.Component;
+
 public class Car extends Vehicle{
 
     public Car(int cargo, String typeOfFuel, double averageConsumption) {

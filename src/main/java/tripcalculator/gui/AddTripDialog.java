@@ -7,6 +7,8 @@ import tripcalculator.vehicle.Car;
 import tripcalculator.vehicle.Truck;
 import tripcalculator.vehicle.Vehicle;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,7 +18,12 @@ import java.util.LinkedList;
 public class AddTripDialog extends JDialog {
 
     private boolean isOk;
+
+    @Resource(name = "Trip")
     private Trip newTrip;
+
+    @Resource(name = "Calculator")
+    private Calculator calculator;
 
 
     public AddTripDialog(java.awt.Frame parent, boolean modal) {
@@ -24,14 +31,10 @@ public class AddTripDialog extends JDialog {
         setTitle("Add");
         setSize(400, 300);
         setLocationRelativeTo(parent);
-        try {
-            init();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         //this.rootPane.setDefaultButton(btOk);
     }
 
+    @PostConstruct
     private void init() throws Exception {
         setLayout(new GridLayout(9, 2));
         setMinimumSize(new Dimension(700, 300));
@@ -97,7 +100,7 @@ public class AddTripDialog extends JDialog {
             LinkedList<Route> routes = new LinkedList<>();
             if(cbRoute.getSelectedIndex() == 0)
             {
-                for(Route r : Calculator.getInstance().getRoutes())
+                for(Route r : calculator.getRoutes())
                 {
                     for(int i = 1; i < cbRoute.getItemCount(); i++)
                     {
@@ -110,7 +113,7 @@ public class AddTripDialog extends JDialog {
             }
             else
             {
-                for(Route r : Calculator.getInstance().getRoutes())
+                for(Route r : calculator.getRoutes())
                 {
                     if(r.getCbString().equals(cbRoute.getSelectedItem()))
                     {
@@ -129,7 +132,8 @@ public class AddTripDialog extends JDialog {
                 boolean adBlue = cbBlue.isSelected();
                 vehicle = new Truck(cargo, fuelType, averageConsumption, adBlue, axles);
             }
-            newTrip = new Trip(routes, vehicle);
+            newTrip.setRoutes(routes);
+            newTrip.setVehicle(vehicle);
             isOk = true;
             dispose();
         }catch(NumberFormatException ex)
@@ -244,7 +248,7 @@ public class AddTripDialog extends JDialog {
 
     private void onClickRB(ActionEvent e) throws Exception {
         cbRoute.removeAllItems();
-        LinkedList<Route> routes = Calculator.getInstance().getRoutes();
+        LinkedList<Route> routes = calculator.getRoutes();
         cbRoute.addItem("All");
         if(e == null)
         {

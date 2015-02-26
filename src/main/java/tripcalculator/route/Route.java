@@ -1,5 +1,7 @@
 package tripcalculator.route;
 
+import org.springframework.stereotype.Component;
+
 public class Route extends RouteTypes {
 
     private int routeID;

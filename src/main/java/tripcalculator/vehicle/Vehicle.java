@@ -1,5 +1,6 @@
 package tripcalculator.vehicle;
 
+import org.springframework.stereotype.Component;
 import tripcalculator.fuel.FuelTypes;
 
 public class Vehicle extends FuelTypes {

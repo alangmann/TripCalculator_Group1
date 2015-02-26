@@ -1,5 +1,6 @@
 package tripcalculator.bl;
 
+import org.springframework.stereotype.Component;
 import tripcalculator.beans.Trip;
 import tripcalculator.beans.WeekdayFormatException;
 import tripcalculator.route.Route;
@@ -7,17 +8,22 @@ import tripcalculator.vehicle.Car;
 import tripcalculator.vehicle.Truck;
 import tripcalculator.vehicle.Vehicle;
 
+import javax.annotation.Resource;
 import javax.swing.table.AbstractTableModel;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
+@Component ("TripModel")
 public class TripModel extends AbstractTableModel {
 
     private final String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "tripcalculator" + File.separator + "bl" + File.separator +  "trips.csv";
     private LinkedList<Trip> trips = new LinkedList<>();
     private String[] headings = {"KM", "Slope", "Type", "Fee", "Vehicle", "Fuel type", "Consumption", "Cargo", "Blue", "Axles", "Total Costs"};
+
+    @Resource(name = "Calculator")
+    private Calculator calculator;
 
     public void addTrip(Trip trip) {
         if (!trips.contains(trip)) {
@@ -60,8 +66,8 @@ public class TripModel extends AbstractTableModel {
                 return trip.getAllFee();
             case 10:
                 try {
-                    return String.format("%3.2f €", Calculator.getInstance().calculateAllCost(trip.getRoutes(), trip.getVehicle(), sdf.format(new Date())));
-                } catch (WeekdayFormatException | IOException e) {
+                    return String.format("%3.2f €", calculator.calculateAllCost(trip.getRoutes(), trip.getVehicle(), sdf.format(new Date())));
+                } catch (WeekdayFormatException e) {
                     e.printStackTrace();
                 }
             default:
@@ -144,7 +150,7 @@ public class TripModel extends AbstractTableModel {
             String[] routeIDs = parts[0].split("#");
             LinkedList<Route> routes = new LinkedList<>();
             for (int i = 0; i < routeIDs.length; i++) {
-                routes.add(Calculator.getInstance().getRouteById(Integer.parseInt(routeIDs[i])));
+                routes.add(calculator.getRouteById(Integer.parseInt(routeIDs[i])));
             }
                 Vehicle vehicle;
                 Double averageConsumption = Double.parseDouble(parts[1]);

@@ -1,5 +1,6 @@
 package tripcalculator.beans;
 
+import org.springframework.stereotype.Component;
 import tripcalculator.route.Route;
 import tripcalculator.vehicle.Vehicle;
 
@@ -93,5 +94,13 @@ public class Trip {
                 routeIDs +=  "#" + route.getRouteID();
         }
         return routeIDs + ";" + vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public void setRoutes(LinkedList<Route> routes) {
+        this.routes = routes;
     }
 }

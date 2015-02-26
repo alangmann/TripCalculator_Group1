@@ -1,5 +1,6 @@
 package tripcalculator.bl;
 
+import org.springframework.stereotype.Component;
 import tripcalculator.beans.WeekdayFormatException;
 import tripcalculator.fuel.Fuel;
 import tripcalculator.route.Route;
@@ -8,26 +9,22 @@ import tripcalculator.vehicle.Car;
 import tripcalculator.vehicle.Truck;
 import tripcalculator.vehicle.Vehicle;
 
+import javax.annotation.Resource;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 
+@Component("Calculator")
 public class Calculator extends RouteTypes {
 
-    private static Calculator calculator;
+    @Resource(name = "Fuel")
     private Fuel fuel;
+
     private LinkedList<Route> routes = new LinkedList<>();
 
-    private Calculator() throws IOException, WeekdayFormatException {
+    public Calculator() throws IOException, WeekdayFormatException {
         loadData();
-    }
-
-    public static Calculator getInstance() throws IOException, WeekdayFormatException {
-        if (calculator == null) {
-            calculator = new Calculator();
-        }
-        return calculator;
     }
 
     public Route getRouteById(int id) {
@@ -42,7 +39,6 @@ public class Calculator extends RouteTypes {
     }
 
     private void loadData() throws IOException, WeekdayFormatException {
-        fuel = Fuel.getInstance();
         FileReader fr = new FileReader(getClass().getResource("routes.csv").getFile());
         BufferedReader br = new BufferedReader(fr);
 

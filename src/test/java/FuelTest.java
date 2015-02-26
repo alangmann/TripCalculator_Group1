@@ -1,22 +1,24 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import tripcalculator.beans.WeekdayFormatException;
 import tripcalculator.fuel.Fuel;
 
+import javax.annotation.Resource;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
 import static org.junit.Assert.assertTrue;
 
+@ContextConfiguration(locations = "classpath:spring/spring-di-sample-annotation-context.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
 public class FuelTest {
 
+    @Resource(name = "Fuel")
     private Fuel testFuel;
-
-    @Before
-    public void setUp() throws Exception {
-        testFuel = Fuel.getInstance();
-    }
 
     @Test
     public void dieselGetsDiesel() throws IOException, WeekdayFormatException {
@@ -55,7 +57,7 @@ public class FuelTest {
 
     private void reassignTestClass() throws IOException, WeekdayFormatException {
         testFuel = null;
-        testFuel = Fuel.getInstance(true);
+        testFuel = new Fuel();
     }
 
 }

@@ -1,5 +1,7 @@
 package tripcalculator.vehicle;
 
+import org.springframework.stereotype.Component;
+
 public class Truck extends Vehicle{
 
     private int axles;

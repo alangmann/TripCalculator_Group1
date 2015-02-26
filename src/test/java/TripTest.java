@@ -1,5 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import tripcalculator.beans.Trip;
 import tripcalculator.route.Route;
 import tripcalculator.vehicle.Car;
@@ -8,10 +11,12 @@ import java.util.LinkedList;
 
 import static org.junit.Assert.*;
 
+@ContextConfiguration(locations = "classpath:spring/spring-di-sample-annotation-context.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
 public class TripTest {
 
     private Trip testTrip;
-    private LinkedList<Route> testRoute;
+    private LinkedList<Route> testRoute = new LinkedList<>();
     private Car testCar;
 
     @Before
@@ -38,6 +43,6 @@ public class TripTest {
 
     @Test
     public void testToString() throws Exception {
-        assertTrue(testTrip.toString().equals(testRoute.toString() + ";" + testCar.toString()));
+        assertTrue(testTrip.toString().equals(testRoute.get(0).toString() + ";" + testCar.toString()));
     }
 }

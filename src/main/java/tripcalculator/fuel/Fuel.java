@@ -1,5 +1,6 @@
 package tripcalculator.fuel;
 
+import org.springframework.stereotype.Component;
 import tripcalculator.beans.WeekdayFormatException;
 
 import java.io.BufferedReader;
@@ -7,27 +8,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
+@Component("Fuel")
 public class Fuel extends FuelTypes {
 
-    private static Fuel instance;
     private HashMap<Day, double[]> fuelMap = new HashMap<>();
 
     public Fuel() throws IOException, WeekdayFormatException {
         loadData();
-    }
-
-    public static Fuel getInstance() throws IOException, WeekdayFormatException {
-        if (instance == null) {
-            instance = new Fuel();
-        }
-        return instance;
-    }
-
-    public static Fuel getInstance(boolean newInstance) throws IOException, WeekdayFormatException {
-        if (instance == null || newInstance) {
-            instance = new Fuel();
-        }
-        return instance;
     }
 
     private void loadData() throws WeekdayFormatException, IOException {

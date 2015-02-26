@@ -1,25 +1,32 @@
 package tripcalculator.gui;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.*;
+import org.springframework.stereotype.Component;
 import tripcalculator.beans.WeekdayFormatException;
 import tripcalculator.bl.TripModel;
 import tripcalculator.bl.TripTableRenderer;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 
+@Component("TripCalculatorGUI")
 public class TripCalculatorGUI extends JFrame {
 
     public final static Color COLOR_DARK = new Color(47, 117, 181);
     public final static Color COLOR_MEDIUM = new Color(155, 194, 230);
     public final static Color COLOR_LIGHT = new Color(189, 214, 238);
 
-    /*
-     *  TODO: change to spring
-     */
-    private TripModel tm = new TripModel();
+    @Resource(name = "TripModel")
+    private TripModel tm;
 
-    public TripCalculatorGUI(){
+    @PostConstruct
+    public void setup(){
         try {
             tm.loadData(null);
             tbTrip.updateUI();
@@ -117,7 +124,8 @@ public class TripCalculatorGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        new TripCalculatorGUI().setVisible(true);
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring/spring-di-sample-annotation-context.xml");
+        context.getBean("TripCalculatorGUI", JFrame.class).setVisible(true);
     }
 
     private JMenuBar menuBar = new JMenuBar();
